@@ -22,11 +22,24 @@ Following changes were made on the repository in order to push the image
 
 * In requirements.txt instead of sklearn I specified scikit-learn. W/o this I encountered the following error * The 'sklearn' PyPI package is deprecated, use 'scikit-learn' rather than 'sklearn' for pip commands.* . For more details we can look at https://towardsdatascience.com/scikit-learn-vs-sklearn-6944b9dc1736
 
+* From requirements.txt I also removed os package (its part of python std install)
+
 * During building using buildx while the build succeeded it did not publish any image to the local docker repository. *docker image ls* did not show the successfully built image. To resolve this I had to use the *--load* parameter and also remove one of the multi arch arguments. Details of this issue can be found here https://github.com/docker/buildx/issues/59. This solution finally worked https://github.com/docker/buildx/issues/59#issuecomment-1168619521
 
 * In order to push a readme to Docker hub I also installed a CLI Plugin pushrm https://poweruser.blog/pushing-a-readme-file-to-docker-hub-68200bc4bf71. Using this executing *docker pushrm <REPOSITORY:IMAGE>* pushed the readme file
 
-## How to use the image
+## Running on Local
+
+* You need git, python 3.8 and pip. See https://pip.pypa.io/en/stable/installation/
+
+* It is recommended that you use Python virtual environments. See https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/
+
+* Run pip3 install -r requirements.txt
+
+* Run python ml_Service_Template.py
+
+
+## How to use the image using Docker
 
 ### Pull Image
 
@@ -43,6 +56,14 @@ After pulling the image check that it is present using following
 docker image ls
 
 ```
+
+### Build Image from Local
+
+```
+docker buildx build -t "tomsriddle/705.603spring24:mlservice_1.0" --load --platform linux/amd64,linux/arm64 .
+
+```
+
 
 ### Run Image
 
