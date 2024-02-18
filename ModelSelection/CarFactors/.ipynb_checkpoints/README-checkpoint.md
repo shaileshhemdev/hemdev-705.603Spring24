@@ -133,25 +133,35 @@ Allowed Values for Above Parameters
 
 <ul>
     <li>
-        <b>manufacturer:</b>
+        <b>manufacturer:</b>  Value from following enumeration ['Subaru', 'LADA', 'Dodge', 'УАЗ', 'Kia', 'Opel', 'Москвич',
+       'Alfa Romeo', 'Acura', 'Dacia', 'Lexus', 'Mitsubishi', 'Lancia',
+       'Citroen', 'Mini', 'Jaguar', 'Porsche', 'SsangYong', 'Daewoo',
+       'Geely', 'ВАЗ', 'Fiat', 'Ford', 'Renault', 'Seat', 'Rover',
+       'Volkswagen', 'Lifan', 'Jeep', 'Cadillac', 'Audi', 'ЗАЗ', 'Toyota',
+       'ГАЗ', 'Volvo', 'Chevrolet', 'Great Wall', 'Buick', 'Pontiac',
+       'Lincoln', 'Hyundai', 'Nissan', 'Suzuki', 'BMW', 'Mazda',
+       'Land Rover', 'Iveco', 'Skoda', 'Saab', 'Infiniti', 'Chery',
+       'Honda', 'Mercedes-Benz', 'Peugeot', 'Chrysler']
     </li>
     <li>
-        <b>transmission:</b>
+        <b>transmission:</b> Value from following enumeration ['automatic', 'mechanical']
     </li>
     <li>
-        <b>color:</b>
+        <b>color:</b>  Value from following enumeration ['silver', 'blue', 'red', 'black', 'grey', 'other', 'brown',
+       'white', 'green', 'violet', 'orange', 'yellow']
     </li>
     <li>
-        <b>engine:</b>
+        <b>engine:</b>  Value from following enumeration ['gasoline', 'diesel', 'electric']
     </li>
     <li>
-        <b>drivetrain:</b>
+        <b>drivetrain:</b>  Value from following enumeration ['all', 'front', 'rear']
     </li>
     <li>
-        <b>state:</b>
+        <b>state:</b>  Value from following enumeration ['owned', 'emergency', 'new']
     </li>
     <li>
-        <b>bodytype:</b>Manufacture year in YYYY format
+        <b>bodytype:</b>Value from following enumeration ['universal', 'suv', 'sedan', 'hatchback', 'liftback', 'minivan',
+       'minibus', 'van', 'pickup', 'coupe', 'cabriolet', 'limousine']
     </li>
     <li>
         <b>hasWarranty:</b>True or False
@@ -165,10 +175,7 @@ Allowed Values for Above Parameters
     <li>
         <b>price:</b>Price in USD should be numeric and integer type
     </li>
-
 </ul>
-
-
 
 #### Infer Example
 
