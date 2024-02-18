@@ -100,6 +100,14 @@ docker run -p <host port>:8786 -v <host path>:/workspace/shared-data "tomsriddle
 
 Note: See the volume mapping - this is needed for the saving of the image for the POST API
 
+#### Docker Image and Run Example
+
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/Module5DockerRunCall.png?raw=true)
+
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/Module5DockerInferCall.png?raw=true)
+
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/Module4DockerConsoleInferCall.png?raw=true)
+
 ## API Usage
 
 Following APIs exposed 
@@ -121,6 +129,46 @@ http://localhost:8786/stats
 http://localhost:8786/infer?manufacturer=<Manufacturer>&transmission=<Transmission>&color=<Color>&engine=<EngineType>&drivetrain=<DriveTrain>&state=<State>&hasWarranty=<True|False>&odometer=<Odometer>&year=<YearofCar>&bodytype=<BodyType>&price=<PriceInUSD>
 
 ```
+Allowed Values for Above Parameters
+
+<ul>
+    <li>
+        <b>manufacturer:</b>
+    </li>
+    <li>
+        <b>transmission:</b>
+    </li>
+    <li>
+        <b>color:</b>
+    </li>
+    <li>
+        <b>engine:</b>
+    </li>
+    <li>
+        <b>drivetrain:</b>
+    </li>
+    <li>
+        <b>state:</b>
+    </li>
+    <li>
+        <b>bodytype:</b>Manufacture year in YYYY format
+    </li>
+    <li>
+        <b>hasWarranty:</b>True or False
+    </li>
+    <li>
+        <b>odometer:</b>Odometer reading should be numeric and integer type
+    </li>
+    <li>
+        <b>year:</b>Manufacture year in YYYY format
+    </li>
+    <li>
+        <b>price:</b>Price in USD should be numeric and integer type
+    </li>
+
+</ul>
+
+
 
 #### Infer Example
 
