@@ -40,6 +40,24 @@ Following are the goals of the system
 
 <ol>
     <li>
+        <b>Organizational: </b> Identify a fraudulent transaction always and never mark a valid transaction as Fraud
+    </li>
+    <li>
+        <b>System:</b>Efficient use of storage, low cost and great customer experience
+    </li>
+    <li>
+        <b>User:</b>Users always alerted for fraudulent transaction before it occurs and never for valid transactions
+    </li>
+    <li>
+        <b>Model:</b>Model should have high accuracy
+    </li>
+</ol>
+
+#### What are the success criteria?
+
+The above goals can be expressed in the following success criteria
+<ol>
+    <li>
         <b>Organizational: </b> Identify a fraudulent transaction 90% of the time and not exceed 30% valid transactions identified as Fraud
     </li>
     <li>
@@ -57,10 +75,6 @@ Following are the goals of the system
         <b>Model:</b>Model should be able to handle highly unbalanced data since the percentage of Fraud is less than 1% of total transactions. It should have a very high precision (>90%) and high recall (>70%)
     </li>
 </ol>
-
-#### What are the success criteria?
-
-TBD
 
 ### REQUIREMENTS
 
