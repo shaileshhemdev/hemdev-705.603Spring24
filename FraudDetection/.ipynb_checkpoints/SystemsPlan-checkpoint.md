@@ -26,9 +26,62 @@ Identifying whether a fraudulent transaction during authorization is a viable on
         <b>Can we tolerate mistakes and a degree of risk?: </b> We first need to list the risks involved. The first risk is if we identify valid transactions as fraud. Most financial institutions do not approve such transactions and engage the customer. So the customer can provide the feedback if they made the transaction or not. If there are too many of these then it can cause nuisance to the customer even if they rationally appreciate the financial institution checking with them. The second risk is if a transaction if fraud but the financial insitution fails to detect this. This can cause a lot of grief to the customer including monetary loss and can lead to poor experience and reduced loyalty which in turn impacts the financial insitution. So there is a medium to high degree of risk involved if things are predicted incorrectly. However there is also an appetite to tolerate some mistakes. For example if occasionally a customer gets a request to confirm a valid transaction they are less likely to be irritated. On the other hand, they probably don't want to ever incur a fraudulent transaction. So while both factors are important, it is more important to get the fraudulent transactions right and then reduce the odds of flagging a valid transaction and this is the tolerance level
     </li>
     <li>
-        <b>Is ML viable?: </b> Machine Learning can do this as we have sophisticated algorithms for this pattern recognition or classification today coupled with the ability to analyze large amounts of data using cloud and distributed systems. Identifying whether a transaction is fraudulent or not is essentially a supervised learning problem specifically classification. In the absence of a machine learning system, customers would be calling in to indicate if the transaction is fraudulent and this data can be associated with the past transaction (annotated as fraud) and used for the learning process. Even going forward, since the system will engage the customer the customer's feedback can be used to perform this annotation to always have this data. As more data in terms of dimensions gets collected, the model can be enhanced. Cloud Storage has made it economically feasible to store large amounts of data in low cost commodity hardware storage as well as store structured and unstructured data. Technoligical advances also make it possible to have sophisticated ETL pipelines to collect raw data, cleanse it, perform transformatioms and store data with the right granularity, accuracy and completeness to enable a model to learn. 
+        <b>Is this solution (with ML) feasible? : </b> Machine Learning can do this as we have sophisticated algorithms for this pattern recognition or classification today coupled with the ability to analyze large amounts of data using cloud and distributed systems. Identifying whether a transaction is fraudulent or not is essentially a supervised learning problem specifically classification. In the absence of a machine learning system, customers would be calling in to indicate if the transaction is fraudulent and this data can be associated with the past transaction (annotated as fraud) and used for the learning process. Even going forward, since the system will engage the customer the customer's feedback can be used to perform this annotation to always have this data. As more data in terms of dimensions gets collected, the model can be enhanced. Cloud Storage has made it economically feasible to store large amounts of data in low cost commodity hardware storage as well as store structured and unstructured data. Technoligical advances also make it possible to have sophisticated ETL pipelines to collect raw data, cleanse it, perform transformatioms and store data with the right granularity, accuracy and completeness to enable a model to learn. 
     </li>
 </ol>
+
+## REQUIREMENTS (What's)
+
+### SCOPE
+
+#### What are our goals?
+
+Following are the goals of the system
+
+<ol>
+    <li>
+        <b>Organizational: </b> Identify a fraudulent transaction 90% of the time and not exceed 30% valid transactions identified as Fraud
+    </li>
+    <li>
+        <b>System:</b>These can be broken down into the following sub goals
+        
+        <ul>
+            <li>System should be able to retrain the model at prescribed intervals</li>
+            <li>System should be able to replace the models used for training and predicting</li>
+            <li>System should be able to monitor the performance of the model by running test transactions</li>
+        </ul>
+    </li>
+    <li>
+        <b>User:</b>User should be able to indicate if the prediction is the right prediction
+    </li>
+    <li>
+        <b>Model:</b>Model should be able to handle highly unbalanced data since the percentage of Fraud is less than 1% of total transactions. It should have a very high precision (>90%) and high recall (>70%). 
+    </li>
+</ol>
+
+#### What are the success criteria?
+
+TBD
+
+### REQUIREMENTS
+
+#### What are our (system) Assumptions?
+
+TBD
+
+#### What are our (system) Requirements?
+
+TBD
+
+### RISK & UNCERTAINTIES
+
+#### What are the possible harms?
+
+TBD
+
+#### What are the causes of mistakes?
+
+TBD
 
 *italic*
 
