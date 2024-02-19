@@ -43,16 +43,18 @@ Following are the goals of the system
         <b>Organizational: </b> Identify a fraudulent transaction 90% of the time and not exceed 30% valid transactions identified as Fraud
     </li>
     <li>
-        <b>System:</b>These can be broken down into the following sub goals
-            * System should be able to retrain the model at prescribed intervals</li>
-            * System should be able to replace the models used for training and predicting</li>
-            * System should be able to monitor the performance of the model by running test transactions</li>
+        <b>System:</b>These can be broken down into the following sub goals      
+        <ol>
+            <li>System should be able to retrain the model at prescribed intervals</li>
+            <li>System should be able to replace the models used for training and predicting</li>
+            <li>System should be able to monitor the performance of the model by running test transactions</li>
+        </ol>
     </li>
     <li>
         <b>User:</b>User should be able to indicate if the prediction is the right prediction
     </li>
     <li>
-        <b>Model:</b>Model should be able to handle highly unbalanced data since the percentage of Fraud is less than 1% of total transactions. It should have a very high precision (>90%) and high recall (>70%). 
+        <b>Model:</b>Model should be able to handle highly unbalanced data since the percentage of Fraud is less than 1% of total transactions. It should have a very high precision (>90%) and high recall (>70%)
     </li>
 </ol>
 
