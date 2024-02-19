@@ -58,21 +58,20 @@ Following are the goals of the system
 The above goals can be expressed in the following success criteria
 <ol>
     <li>
-        <b>Organizational: </b> Identify a fraudulent transaction 90% of the time and not exceed 30% valid transactions identified as Fraud
+        <b>Measurements</b>These can be broken down into the following sub goals      
+        <ol>
+            <li>Model should be able to handle highly unbalanced data since the percentage of Fraud is less than 1% of total transactions and hence we need appropriate metrics that provide a high degree of accuracy for such data</li>
+            <li>Metrics should enable identifying a fraudulent transaction 90% of the time and enable not exceeding the number of times a valid transaction is identified as Fraud by 30%</li>
+            <li>It should have a very high precision (>90%) and high recall (>70%)</li>
+        </ol>
     </li>
     <li>
-        <b>System:</b>These can be broken down into the following sub goals      
+        <b>Metrics Evaluation</b>The evaluation of the metrics need to factor the following
         <ol>
             <li>System should be able to retrain the model at prescribed intervals</li>
             <li>System should be able to replace the models used for training and predicting</li>
             <li>System should be able to monitor the performance of the model by running test transactions</li>
         </ol>
-    </li>
-    <li>
-        <b>User:</b>User should be able to indicate if the prediction is the right prediction
-    </li>
-    <li>
-        <b>Model:</b>Model should be able to handle highly unbalanced data since the percentage of Fraud is less than 1% of total transactions. It should have a very high precision (>90%) and high recall (>70%)
     </li>
 </ol>
 
