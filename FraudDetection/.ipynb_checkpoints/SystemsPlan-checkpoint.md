@@ -56,9 +56,10 @@ Following are the goals of the system
 #### What are the success criteria?
 
 The above goals can be expressed in the following success criteria
+
 <ol>
     <li>
-        <b>Measurements</b>These can be broken down into the following sub goals      
+        <b>Metric Design: </b>The design of the metrics should consider the following  
         <ol>
             <li>Model should be able to handle highly unbalanced data since the percentage of Fraud is less than 1% of total transactions and hence we need appropriate metrics that provide a high degree of accuracy for such data</li>
             <li>Metrics should enable identifying a fraudulent transaction 90% of the time and enable not exceeding the number of times a valid transaction is identified as Fraud by 30%</li>
@@ -66,7 +67,7 @@ The above goals can be expressed in the following success criteria
         </ol>
     </li>
     <li>
-        <b>Metrics Evaluation</b>The evaluation of the metrics need to factor the following
+        <b>Metrics Evaluation: </b>The evaluation of the metrics need to factor the following
         <ol>
             <li>System should be able to retrain the model at prescribed intervals</li>
             <li>System should be able to replace the models used for training and predicting</li>
@@ -79,41 +80,94 @@ The above goals can be expressed in the following success criteria
 
 #### What are our (system) Assumptions?
 
-TBD
+Following are the assumptions made by the system
+
+<ol>
+    <li>All data needed for the system is collected and accessible by the system</li>
+    <li>Changes in data such as additional attributes or value enumerations or data types are communicated in advance to the system in order to adapt and adjust before these changes are put into production</li>
+    <li>Sufficient guard rails are present upstream to foster trust in the data and ensuring data is accurate</li>
+    <li>Sufficient validations are in place upstream to avoid incomplete or missing data</li>
+    <li>Business Domain Experts are available to provide suggestions and recommnedations on how to cleanse data including imputations for missing data</li>
+    <li>A large amount of historical labelled (ground truth) data is available to initially train the models and this data is certified by the domain experts</li>
+</ol>
+
 
 #### What are our (system) Requirements?
 
-TBD
+Based on the goals we come up with the following requirements 
+
+<ol>
+    <li>
+        <b>Functional: </b>Here are the functional requirements of the system
+        <ol>
+            <li>System should predict if a given transaction is fraudulent or not</li>
+            <li>System should enable the user (customer) to indicate if the prediction is accurate or not by approving or declining a fraudulent transaction</li>
+            <li>System should allow authorized users (business users of financial institution) to test random transactions to measure the performance of the system</li>
+           <li>System should allow authorized users (machine learning engineers) to test different models</li>
+           <li>System should allow authorized users (machine learning engineers) to retrain models on existing data</li>
+           <li>System should at least 70% Recall</li>
+           <li>System should at least 90% Precision</li>
+           <li>System should at least 0.8% ROC AUC Score</li>
+           <li>System should at least 0.7% F1 Score</li>
+        </ol>
+    </li>
+    <li>
+        <b>Non Functional Requirements: </b>Here are the non-functional requirements of the system
+        <ol>
+           <li>System should allow authorized users (machine learning engineers) to pre process data to be fed into a model for training to cover for situations when the logic of imputation has changed or upstream bugs are discovered</li>
+            <li>System should allow authorized users (machine learning engineers) to change thresholds for the model and verify if the model meets the thresholds specified on validation data</li>
+        </ol>
+    </li>
+</ol>
 
 ### RISK & UNCERTAINTIES
 
 #### What are the possible harms?
 
-TBD
+Here are some of the harms that we see 
+
+<ol>
+    <li>Poor Model Quality leads to high number of fraudulent transactions going undetected leading to large scale monetary risk for the financial insitution as well as loss of customers</li>
+    <li>Poor Model Quality leads to high number of valid transactions predicted as fraud leading to large scale customer dissatisfaction</li>
+    <li>Customers in certain age groups or races or locations are more vulnerable to fraud going undetected versus the others leading to a bias perception</li>
+    <li>Sudden dips and surges in the metrics impacting the overall performance of the model</li>
+    <li>Model performance degrades over time</li>
+</ol>
+
 
 #### What are the causes of mistakes?
 
-TBD
+Here are some of the causes that lead to mistakes
 
-*italic*
+<ol>
+    <li>Data Systems are breached where the data used for training is corrupted or manipulated</li>
+    <li>Bugs in upstream systems lead to inaccurate or incomplete data</li>
+    <li>Model performs well during training and even validation but not in actual field</li>
+    <li>Model does not adapt to changing shape and quality of data</li>
+</ol>
 
-**bold**
+## IMPLEMENTATION (How's)
 
-* list 1
-* list 2
+### DEVELOPMENT
 
-- list 1
-- list 2
+#### Methodology
 
-This decribes this particular project and directory level.
+#### High-level System Design
 
+#### Development Workflow
 
-[GitHub Readme1 Reference](https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md)
+### POLICY
 
-[General Readme2 Reference](https://www.mygreatlearning.com/blog/readme-file/#:~:text=When%20you%20create%20a%20repository,be%20easily%20converted%20to%20text)
+#### Human-Machine Interfaces
 
-Bring in local graphic
-![GitHub Logo](./regan.png) 
+#### Regulations
 
-Bring in remote graphic
-![GitHub Logo](https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png) 
+### OPERATIONS
+
+#### Continuous Deployment
+
+#### Post-deployment Monitoring
+
+#### Maintenance
+
+#### Quality Assurance
