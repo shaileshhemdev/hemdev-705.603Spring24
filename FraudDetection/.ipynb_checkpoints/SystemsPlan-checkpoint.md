@@ -44,12 +44,9 @@ Following are the goals of the system
     </li>
     <li>
         <b>System:</b>These can be broken down into the following sub goals
-        
-        <ul>
-            <li>System should be able to retrain the model at prescribed intervals</li>
-            <li>System should be able to replace the models used for training and predicting</li>
-            <li>System should be able to monitor the performance of the model by running test transactions</li>
-        </ul>
+            * System should be able to retrain the model at prescribed intervals</li>
+            * System should be able to replace the models used for training and predicting</li>
+            * System should be able to monitor the performance of the model by running test transactions</li>
     </li>
     <li>
         <b>User:</b>User should be able to indicate if the prediction is the right prediction
