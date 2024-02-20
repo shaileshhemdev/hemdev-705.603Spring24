@@ -152,9 +152,63 @@ Here are some of the causes that lead to mistakes
 
 #### Methodology
 
+Our methodology involves the following Software Development Lifecycle processes 
+
+<ol>
+     <li>
+        <b>Scoping and Requirements:</b>In this phase we will articulate the Whys, Whats and Hows. In the Whys we will clearly define the problem statement and explore viability of the solution. Then we will proceed to the Whats and lay out the Goals, Assumptions, Requirements and success criteria including the metrics that we have as our targets. We will seek feedback at this stage to firm up the requirements. We will also provide high level estimates, fix cadences for any ceremonies (E.g. Scrum), explain the risks, outline high level project plan and obtain buy in from all our stakeholders along with fixing regular check points to review progress, impediments and updates. 
+    </li>
+     <li>
+        <b>System Design:</b>In this phase we will layout the design of the system and review it with stakeholders to obtain sign off. The system design at this stage will outline key components, estimate the cost, outline key technologies to be used, various components to be built
+    </li>
+    <li>
+        <b>Data Analysis:</b>In this phase sample datasets or subsets of sample data would be loaded into local development workspaces such as Jupyter notebooks to help understand the data. We will build visualizations and the purpose here would be to get some clues or intuition on what potentially could be affecting the end result. 
+    </li>
+    <li>
+        <b>Model Building:</b>In this phase we will start applying some transformations, imputations to address missing data, encoding, scaling, etc and using it to try different models. The goal here would be to see if we can get a good set of models that give us the desired results for the metrics that we fixed during the Requirements phase. This model building will go hand in hand with additional cleansing, transformations of the data and will start moving from local workstations to actual cloud based notebook enviroments where the model can be trained on larger datasets and tested on larger datasets
+    </li>
+    <li>
+        <b>Development:</b>In this phase, we will now use the inputs from the Data Analysis and Model Buildng phases to build a production grade machine learning pipeline where we will build all the needed components. We will include databases to persist models, various states in the ML pipeline, metrics and any other intermediate data. There will also be non ML components to allow user interaction such as APIs and code will be structured for reusability. There would be automated test suites to test all these components ranging from unit to acceptance tests
+    </li>
+    <li>
+        <b>Deployment and Beta Testing:</b>In this phase, we will deploy all our code into production and enable it for Beta testing using features like launching dark. 
+    </li>
+    <li>
+        <b>Operations:</b>In this phase, we will ensure we have the needed monitoring both for the working of the software components to cover availability, scalability, performance, security and resilience but also to continiously monitor the performance of the model as per the said metrics. Finally this will also include steps to periodically re train the models and launch new versions in dark mode for beta testing before the new version becomes fully live
+    </li>
+</ol>
+
 #### High-level System Design
 
+Our overall system design involves the following key components
+
+<ol>
+    <li>
+        <b>Pipeline:</b>We will build a Machine Learning pipeline that has several steps and data can flow into and out from these steps where each step performs specific tasks such as pre-processing or training
+    </li>
+    <li>
+        <b>Data Pre-processing:</b>This component will prepare the data so that it is usable for any learning process. This involves imputing missing values, scaling and normalizing the data, performing transformations such as address normalizations or case sensitivities or encoding or labelling data. The final transformed data will flow through the Data Processing Pipeline to the next stage often saving the transformed files somewhere for efficient usages by the next stages in the pipeline
+    </li>
+    <li>
+        <b>Feature Engineering:</b>This component will analyze all the features and drop features that are not necessary. Additionally it might perform some higher order transformations that generate new features that are permutations and combinations of the original input features to create the final set of features to be used for training
+    </li>
+    <li>
+        <b>Dataset:</b>This component will provide relevant portions of the training, validation and test datasets that can be leveraged by other modules
+    </li>
+    <li>
+        <b>Training:</b>This component will train the model and perform analysis such as cross validation or multi fold analysis to ensure that will enable choosing the best hyperparameters for the model and ensure that the model is robust across all the combinations of the data 
+    </li>
+    <li>
+        <b>Testing:</b>This component will enable testing the trained models both on previously seen data such as a subset from the original dataset but also from never seen before data. 
+    </li>
+    <li>
+        <b>Metrics:</b>This component will provide the needed metrics on the model for the dataset provided persisting it for traceability
+    </li>
+</ol>
+
 #### Development Workflow
+
+As described in the Methodology section we will follow the Scoping --> System Design --> Data Analysis --> Modeling --> Development --> Deployment --> Operations workflow
 
 ### POLICY
 
