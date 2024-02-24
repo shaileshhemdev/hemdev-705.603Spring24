@@ -1,0 +1,33 @@
+Model Results for RF:
+		Accuracy = 99.77%
+		Balanced Accuracy = 83.13%
+		Specificity = 99.95%
+		Sensitivity = 66.32%
+		Precision = 86.66%
+		Recall = 66.32%
+		F1 Score = 75.14%
+		ROC AUC Score = 83.13%
+		Average Precision Score = 57.65%
+
+Model Results for GB:
+		Accuracy = 99.64%
+		Balanced Accuracy = 80.08%
+		Specificity = 99.85%
+		Sensitivity = 60.31%
+		Precision = 67.56%
+		Recall = 60.31%
+		F1 Score = 63.73%
+		ROC AUC Score = 80.08%
+		Average Precision Score = 40.95%
+
+Model Results for AB:
+		Accuracy = 99.48%
+		Balanced Accuracy = 50.00%
+		Specificity = 100.00%
+		Sensitivity = 0.00%
+		Precision = 0.00%
+		Recall = 0.00%
+		F1 Score = 0.00%
+		ROC AUC Score = 50.00%
+		Average Precision Score = 0.52%
+
