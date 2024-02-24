@@ -212,7 +212,38 @@ As described in the Methodology section we will follow the Scoping --> System De
 
 #### Human-Machine Interfaces
 
+We have assumed that following upstream human machine interactions would exist
+
+<ol>
+    <li>
+        <b>Engagement based on Fraud Prediction:</b>Our service predicts whether a transaction is fraud is not. System consuming this information along with upstream systems would need to engage the user to confirm if it is a fraud prior to approving or declining the transaction. 
+    </li>
+    <li>
+        <b>Customer Fraud Engagement Feedback:</b>We have assumed that an upstream system will log the actual fraud class when the customer is asked to confirm if a transaction is fraudulent or not. Similarly if a fraudulent transaction is not predicted but the customer engages the institution after the incident, the same would be captured. 
+    </li>
+    <li>
+        <b>New Ground Truth Data:</b>We expect an upstream system to periodically send us new training data on the basis of the latest set of transactions joined with the feedback received from customer. Thus the service provider team comprising of ML engineers, Data Scientists and Software engineers would analyze this data and find ways to improve the model with new classifiers, some more transformations and releasing it to production to measure performance. 
+    </li>
+</ol>
+
 #### Regulations
+
+We have researched for following resources that speak to what a financial institution needs to be aware of and in compliance with 
+
+<ol>
+    <li>
+        <b>OCC:</b>https://www.occ.treas.gov/news-issuances/bulletins/2019/bulletin-2019-37.html
+    </li>
+    <li>
+        <b>CFPB:</b>https://www.consumerfinance.gov/rules-policy/regulations/1005/6/
+    </li>
+    <li>
+        <b>FDIC:</b>https://www.fdic.gov/resources/supervision-and-examinations/examination-policies-manual/section9-1.pdf
+    </li>
+    <li>
+        <b>DOJ:</b>https://www.justice.gov/archives/jm/criminal-resource-manual-958-fraud-affecting-financial-institution
+    </li>
+</ol>
 
 ### OPERATIONS
 
