@@ -164,11 +164,11 @@ We have tried the following models
         <b>ADA Boost:</b> Did not perform well with default parameters with close to 0 for F1
     </li>
     <li>
-        <b>MLP Classifier:</b>
+        <b>Naive Bayes:</b> Had low accuracy along with other metrics also being far lower
     </li>
 </ul>
 
-Results below between Random Forest and Gradient Boost 
+Results below between Random Forest,  Gradient Boost and Naive Bayes
 
 ![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/ClassifierAccuracy.png?raw=true)
 
