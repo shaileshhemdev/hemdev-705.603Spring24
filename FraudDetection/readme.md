@@ -147,7 +147,45 @@ Response Body
 
 #### Valid Transaction Example
 
-![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/FraudDetectionDetectFraudAPI.png?raw=true)
+```
+POST http://localhost:8788/detect-fraud
+
+Request Body (all attributes are mandatory)
+--------------------------------------------------------
+{
+    "trans_date_trans_time": "2019-01-02 01:06:37",
+    "cc_num": "2703186189652095",
+    "merchant": "fraud_Rippin, Kub and Mann",
+    "category": "gas_transport",
+    "amt": 2813.060,
+    "first": "John",
+    "last": "Doe",
+    "sex": "F",
+    "street": "57636 Russet Ln",
+    "city": "South Lyon",
+    "state": "MI",
+    "zip": "48122",
+    "lat": 29.440	, 
+    "long": -99.727,
+    "city_pop": 1595797,
+    "job": "Soil scientist",
+    "dob": "1960-10-28",
+    "trans_num": "0b242abb623afc578575680df30655b9",
+    "unix_time" : 1325468849,
+    "merch_lat": 29.819,
+    "merch_long": -99.143
+}
+
+Response Body
+--------------------------------------------------------
+
+{
+    "is_fraud": true
+}
+
+```
+
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/FraudulentTransactionSample.png?raw=true)
 
 ## Model Evaluation
 
