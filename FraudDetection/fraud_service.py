@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request, jsonify
 import sys
+import os
 
 from data_pipeline import ETL_Pipeline 
 from dataset import Fraud_Dataset
@@ -210,8 +211,12 @@ if __name__ == "__main__":
     flaskPort = 8786
 
     # Get command line arguments
-    data_folder                 = sys.argv[1]
-    fraud_training_data_file    = sys.argv[2]
+    if (len(sys.argv)>1):
+        data_folder                 = sys.argv[1]
+        fraud_training_data_file    = sys.argv[2]
+    else: 
+        data_folder = os.environ['data-folder']
+        fraud_training_data_file = os.environ['training-data-file']
 
     # Process the Data needed to train the model
     print(f'Start an ETL_Pipeline to load training data with shared folder = {data_folder} and training data file = {fraud_training_data_file}')
