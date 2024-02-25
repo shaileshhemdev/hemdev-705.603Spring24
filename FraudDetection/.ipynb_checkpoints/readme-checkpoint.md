@@ -149,6 +149,28 @@ Response Body
 
 ![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/FraudDetectionDetectFraudAPI.png?raw=true)
 
+## Model Evaluation
+
+We have tried the following models
+
+<ul>
+    <li>
+        <b>Random Forest:</b>This was by far the most robust with its ROC AUC and F1 Score staying in comparable ranges for Training, Validation and Testing Data. Due to this we eventually picked this
+    </li>
+    <li>
+        <b>Gradient Boost:</b>Did extremely well on Training and Validation but not great on Test. So did not appear robust from POV of unseen data
+    </li>
+    <li>
+        <b>ADA Boost:</b> Did not perform well with default parameters with close to 0 for F1
+    </li>
+    <li>
+        <b>MLP Classifier:</b>
+    </li>
+</ul>
+
+Results below between Random Forest and Gradient Boost 
+
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/ClassifierAccuracy.png?raw=true)
 
 ## Troubleshooting
 
