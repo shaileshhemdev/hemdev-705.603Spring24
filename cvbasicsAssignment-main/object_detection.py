@@ -3,8 +3,32 @@ import numpy as np
 
 class ObjectDetection:
     def __init__(self, base_dir = '', confidence_threshold=0.5, box_threshold = 0.4, scaling_factor = 1/255):
-        print('Init')
+        """
+        A class used to represent the Core Object Detection Processing
 
+        ...
+
+        Attributes
+        ----------
+        base_dir : str
+            The directory where the files such as weights, configurations and images need to be stored
+        confidence_threshold : float
+            The threshold for confidence for an object detection defaulting to 0.5
+        box_threshold : float
+            The threshold for boxes for an object detection defaulting to 0.4 while removing overlapping boxes
+        scaling_factor : float
+            The scaling factor - defaulting to 1/255 since we have RGB color code values
+
+        Methods
+        -------
+        process()
+            Key method that takes the image saved, obtains the various classes, their confidence intervals and boxes for objects
+        get_objects()
+            Given the classes, boxes it removes overlapping redundant boxes. As a result you get the exact number of objects found
+        save_source_image()
+            Saves source image in a directory
+        """
+    
         # Initialize instance variables
         self.base_dir = base_dir
         self.confidence_threshold = confidence_threshold
@@ -30,9 +54,62 @@ class ObjectDetection:
         self.colors = np.random.uniform(0, 255, size=(len(self.classes), 3))
 
     def save_source_image(self, image_name, image_byte_stream):
+        """
+        A method used to save source image
+
+        ...
+
+        Parameters
+        ----------
+        image_name : str
+            The name of the image
+        image_byte_stream : bytes
+            The bytes for the image to be saved
+        """
         image_byte_stream.save(self.base_dir + image_name)
 
+    def detect(self, image_name):
+        """
+        A method used to take an image and detect objects
+        ...
+
+        Parameters
+        ----------
+        class_ids : ndarray
+            Array of class labels found through the object detection
+        boxes : ndarray
+            Array of boxes found through the object detection
+        confidences : ndarray
+            Array of confidences found through the object detection   
+
+        Returns
+        ----------
+        class_confidence : ndarray
+            Array of tuples with the first element being the class label and the second being the confidence %                     
+        """
+        class_ids, boxes, confidences = self.process(image_name)
+        return self.get_objects(class_ids, boxes, confidences)
+
     def process(self, image_name):
+        """
+        A method used to process the image through the Neural Network for Object detection and return the classes, boxes and 
+        confidence for those class predictions 
+        ...
+
+        Parameters
+        ----------
+        image_name : str
+            The name of the image
+        
+        Returns
+        ----------
+        class_ids : ndarray
+            Array of class labels found through the object detection
+        boxes : ndarray
+            Array of boxes found through the object detection
+        confidences : ndarray
+            Array of confidences found through the object detection                        
+        """
         # Load the image
         img = cv.imread(self.base_dir + image_name)
 
@@ -71,6 +148,23 @@ class ObjectDetection:
         return (class_ids, boxes, confidences)
     
     def get_objects(self, class_ids, boxes, confidences): 
+        """
+        A method used to remove redundant or overlapping boxes. As a result you get the exact number of objects found with the confidence
+        ...
+        Parameters
+        ----------
+        class_ids : ndarray
+            Array of class labels found through the object detection
+        boxes : ndarray
+            Array of boxes found through the object detection
+        confidences : ndarray
+            Array of confidences found through the object detection  
+        
+        Returns
+        ----------
+        class_confidence : ndarray
+            Array of tuples with the first element being the class label and the second being the confidence %  
+        """
         # Remove overlapping boxes
         indexes = cv.dnn.NMSBoxes(boxes, confidences, self.confidence_threshold, self.box_threshold)
 
@@ -81,7 +175,8 @@ class ObjectDetection:
         for i in range(len(boxes)):
             if i in indexes:
                 label = str(self.classes[class_ids[i]])
-                class_confidence += (label, confidences[i]*100)
+                #class_confidence += {label, confidences[i]*100}
+                class_confidence.append(tuple((label, confidences[i]*100)))
         
         return class_confidence
 

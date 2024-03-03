@@ -1,26 +1,105 @@
 # Graphical Degrading and Object Detection Assignment
 
-## Steps for Part 1 - Graphical Degrading
-1. Download zip code from assignment repository
-1. Download the [yolov3.weights](https://pjreddie.com/media/files/yolov3.weights) from the readme in the github repository (This file is too big for github versioning)
-1. Edit/Create an git "exclude" file in the main portfolio directory ".git/info".  Add "yolov3.weights" on a line by itself.  This avoids a git push failure due to the size of the file.
-1. Unzip into your local portfolio directory for Assignment6
-1. Fill in the missing code in this notebook  (You will need the working code examples to do the next step)
-1. Create a python class that allows the following
-   - Reads in the image
-   - Create a loop that alters individual changes of the items below to determine names of identified objects and their confidence (down to when the object detetion is lost).  Remember to reset the image through each pass as they are not iterative.
-     - size
-     - rotation
-     - noise
-   - Note the results with a degradtion point and a Graph showing the confidence results
+## Overview
+
+The repository contains an implementation of the OpenCV2 Deep Neural Network using YOLO model for object detection in images. It has the following key files 
+
+<ul>
+    <li>
+        <b>Notebook (ObjectDetection.ipynb)</b>: In this notebook we demonstrate how certain reduction techniques on images can impact the object detection 
+    </li>
+    <li>
+        <b>Python Class (object_detection.py)</b>: This class encapsulates the Deep Neural Network implementation to return the objects detected on a given image with the corresponding confidences and bounding boxes
+    </li>
+    <li>
+        <b>Flask Service (object_detection_service.py)</b>: This provides a REST service to post any image to the service to obtain the objects detected along with their confidence
+    </li>
+</ul>
    
-## Steps for Part 2 - Object Detection
-1.  Generate a web interface python script that ingests a POST command of a picture Use [postman](https://www.postman.com/) to generate the post with picture of your choice.
-1.  Returns the names of the items detected and the assocated confidence (you do not have to return the marked up image)
-1.  Add to your python class above to offer this capability
-1.  Test web interface locally
-1.  Create a Dockerfile and build the image
-1.  Test the Dockerfile locally
-1.  Push notebook, python script, readme, etc to your github portfolio (since you are in the right location locally you just need to do a push at the main directory of the portfolio (after git add * and git commit -m " comment)
-1.  Push locally built and test docker image to your docker hub portfolio.  Manually add to docker readme.
-1.  Submit the two links (github Assignment5 directory and docker hub) via text submission to Canvas.
+## Local Development Environment used for building image
+
+* Apple Mac M1 chip
+* Sonoma 14.1.2
+* Docker Desktop for Mac 4.26.1 (131620)
+
+## Running on Local
+
+* You need git, python 3.8 and pip. See https://pip.pypa.io/en/stable/installation/
+
+* It is recommended that you use Python virtual environments. See https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/
+
+* Run pip3 install -r requirements.txt
+
+* Run python object_detection_service.py
+
+
+## How to use the image using Docker
+
+### Pull Image
+
+To pull an image use the following 
+
+```
+docker pull tomsriddle/cv-objectdetection:1.0
+
+```
+
+After pulling the image check that it is present using following
+
+```
+docker image ls
+
+```
+
+### Build Image from Local
+
+```
+docker buildx build -t "tomsriddle/cv-objectdetection:1.0" --load --platform linux/amd64,linux/arm64 .
+
+```
+
+
+### Run Image
+
+To run the image use following
+
+```
+docker run -p <host port>:8786 -v <host path>:/workspace/shared-data -e data-folder=/workspace/shared-data/ "tomsriddle/cv-objectdetection:1.0" 
+
+```
+
+Note: See the volume mapping - this is needed for the saving of the image for the POST API. This volume should have the yolov3.cfg and yolov3.weights files as shown below
+
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/Module6YoloFilesInVolume.png?raw=true)
+
+#### Docker Image and Run Example
+
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/Module6DockerRunCall.png?raw=true)
+
+
+## API Usage
+
+Following APIs exposed 
+
+### Detect 
+
+```
+http://localhost:8786/detect
+
+```
+We need to submit form-data with image submitted as <b>imagefile</b> attribute 
+
+#### Detect Example
+
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/Module6DetectCall.png?raw=true)
+
+#### Detect Example in Docker
+
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/Module6DetectCallDocker.png?raw=true)
+
+Notice how when you make the call the sent image is saved on your volume
+
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/Module6SentImagePersistedInVolume.png?raw=true)
+
+
+

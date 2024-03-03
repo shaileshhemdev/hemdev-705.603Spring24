@@ -1,0 +1,6 @@
+numpy
+scikit-learn
+opencv-python-headless
+wandb
+scikit-image
+flask
