@@ -32,6 +32,23 @@ The repository contains an implementation of the OpenCV2 Deep Neural Network usi
 
 * Run python object_detection_service.py
 
+## Notebook
+
+The notebook demonstrates the impact of resizing, rotations and noise on the ability to detect objects with high confidence. You can run the notebook and / or take a look at the graphs as well as the output images within the <b>pictures</b> folder. Here are the images
+
+<ul>
+    <li>
+        <b>Resizing:</b> We have applied resizing involving division of original image by 1/2, 1/4, 1/8.. etc as long as the resized dimensions reach 0. Thus you have images such as "bermuda_resize_[resized-dimention]" E.g. bermuda_resize_1114.jpg, bermuda_resize_557.jpg, ..., bermuda_resize_2.jpg
+    </li>
+    <li>
+        <b>Rotation:</b> We have applied rotations involving increments by 15 degress till rotations reach 120 degrees. Thus you have images such as "bermuda_rotate_[rotation-degree]" E.g. bermuda_rotate_15.jpg, bermuda_rotate_30.jpg, ..., bermuda_rotate_120.jpg
+    </li>
+    <li>
+        <b>Noise:</b> We have applied noise involving increments by 25 degress till noise reach 250. Thus you have images such as "bermuda_noise_[noise-level]" E.g. bermuda_noise_25.jpg, bermuda_noise_50.jpg, ..., bermuda_noise_250.jpg
+    </li>
+</ul>
+
+You can see with these images how the image gets distorted
 
 ## How to use the image using Docker
 
