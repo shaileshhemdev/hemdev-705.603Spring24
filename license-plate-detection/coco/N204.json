@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 69,
+            "folder": "../images/",
+            "file_name": "N204.jpeg",
+            "path": null,
+            "width": 736,
+            "height": 483,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 69,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                94.0,
+                307.0,
+                112.0,
+                27.0
+            ],
+            "area": 3024.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

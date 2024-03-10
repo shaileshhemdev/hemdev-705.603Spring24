@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 32,
+            "folder": "../images/",
+            "file_name": "N8.jpeg",
+            "path": null,
+            "width": 2962,
+            "height": 2223,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 32,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                788.0,
+                1675.0,
+                737.0,
+                176.0
+            ],
+            "area": 129712.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 1,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "num_plate",
+            "supercategory": null
+        }
+    ]
+}

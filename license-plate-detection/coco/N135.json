@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 207,
+            "folder": "../images/",
+            "file_name": "N135.jpeg",
+            "path": null,
+            "width": 470,
+            "height": 375,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 207,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                157.0,
+                197.0,
+                184.0,
+                50.0
+            ],
+            "area": 9200.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

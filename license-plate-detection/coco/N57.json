@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 165,
+            "folder": "../images/",
+            "file_name": "N57.jpeg",
+            "path": null,
+            "width": 642,
+            "height": 400,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 165,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                211.0,
+                161.0,
+                195.0,
+                41.0
+            ],
+            "area": 7995.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

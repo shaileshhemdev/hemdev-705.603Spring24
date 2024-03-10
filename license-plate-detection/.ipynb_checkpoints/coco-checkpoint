@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 225,
+            "folder": "/workspace/shared-data/license-plates/../images/",
+            "file_name": "N2.jpeg",
+            "path": null,
+            "width": 3112,
+            "height": 2340,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 225,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                1804.0,
+                1734.0,
+                689.0,
+                148.0
+            ],
+            "area": 101972.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 1,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "num_plate",
+            "supercategory": null
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 169,
+            "folder": "../images/",
+            "file_name": "N81.jpeg",
+            "path": null,
+            "width": 469,
+            "height": 436,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 169,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                66.0,
+                302.0,
+                108.0,
+                30.0
+            ],
+            "area": 3240.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 117,
+            "folder": "../images/",
+            "file_name": "N23.jpeg",
+            "path": null,
+            "width": 640,
+            "height": 425,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 117,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                107.0,
+                264.0,
+                94.0,
+                24.0
+            ],
+            "area": 2256.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 128,
+            "folder": "../images/",
+            "file_name": "N209.jpeg",
+            "path": null,
+            "width": 500,
+            "height": 378,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 128,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                145.0,
+                200.0,
+                174.0,
+                44.0
+            ],
+            "area": 7656.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

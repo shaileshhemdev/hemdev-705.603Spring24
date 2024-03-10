@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 179,
+            "folder": "../images/",
+            "file_name": "N131.jpeg",
+            "path": null,
+            "width": 500,
+            "height": 291,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 179,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                198.0,
+                107.0,
+                151.0,
+                36.0
+            ],
+            "area": 5436.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

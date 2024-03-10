@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 76,
+            "folder": "../images/",
+            "file_name": "N163.jpeg",
+            "path": null,
+            "width": 660,
+            "height": 440,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 76,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                230.0,
+                203.0,
+                86.0,
+                28.0
+            ],
+            "area": 2408.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

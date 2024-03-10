@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 29,
+            "folder": "../images/",
+            "file_name": "N100.jpeg",
+            "path": null,
+            "width": 450,
+            "height": 417,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 29,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                134.0,
+                312.0,
+                167.0,
+                38.0
+            ],
+            "area": 6346.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

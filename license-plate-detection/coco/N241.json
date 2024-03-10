@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 211,
+            "folder": "../images/",
+            "file_name": "N241.jpeg",
+            "path": null,
+            "width": 800,
+            "height": 600,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 211,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                251.0,
+                308.0,
+                291.0,
+                77.0
+            ],
+            "area": 22407.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

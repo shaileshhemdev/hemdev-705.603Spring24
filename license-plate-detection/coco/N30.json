@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 153,
+            "folder": "../images/",
+            "file_name": "N30.jpeg",
+            "path": null,
+            "width": 1600,
+            "height": 1167,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 153,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                928.0,
+                543.0,
+                291.0,
+                63.0
+            ],
+            "area": 18333.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 25,
+            "folder": "../images/",
+            "file_name": "N64.jpeg",
+            "path": null,
+            "width": 654,
+            "height": 380,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 25,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                19.0,
+                249.0,
+                75.0,
+                65.0
+            ],
+            "area": 4875.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

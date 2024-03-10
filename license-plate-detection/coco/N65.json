@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 27,
+            "folder": "../images/",
+            "file_name": "N65.jpeg",
+            "path": null,
+            "width": 1920,
+            "height": 1080,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 27,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                1024.0,
+                611.0,
+                249.0,
+                69.0
+            ],
+            "area": 17181.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

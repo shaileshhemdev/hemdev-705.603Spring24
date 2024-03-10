@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 172,
+            "folder": "../images/",
+            "file_name": "N56.jpeg",
+            "path": null,
+            "width": 769,
+            "height": 417,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 172,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                302.0,
+                265.0,
+                184.0,
+                38.0
+            ],
+            "area": 6992.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

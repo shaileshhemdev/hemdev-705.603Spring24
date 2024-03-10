@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 87,
+            "folder": "../images/",
+            "file_name": "N11.jpeg",
+            "path": null,
+            "width": 275,
+            "height": 183,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 87,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                131.0,
+                130.0,
+                56.0,
+                14.0
+            ],
+            "area": 784.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 1,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "num_plate",
+            "supercategory": null
+        }
+    ]
+}

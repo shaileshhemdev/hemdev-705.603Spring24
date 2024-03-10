@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 213,
+            "folder": "../images/",
+            "file_name": "N137.jpeg",
+            "path": null,
+            "width": 1024,
+            "height": 685,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 213,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                401.0,
+                456.0,
+                192.0,
+                37.0
+            ],
+            "area": 7104.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

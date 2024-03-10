@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 42,
+            "folder": "../images/",
+            "file_name": "N117.jpeg",
+            "path": null,
+            "width": 602,
+            "height": 339,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 42,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                120.0,
+                161.0,
+                129.0,
+                41.0
+            ],
+            "area": 5289.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

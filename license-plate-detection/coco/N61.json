@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 12,
+            "folder": "../images/",
+            "file_name": "N61.jpeg",
+            "path": null,
+            "width": 500,
+            "height": 457,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 12,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                158.0,
+                252.0,
+                192.0,
+                45.0
+            ],
+            "area": 8640.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

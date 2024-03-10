@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 15,
+            "folder": "../images/",
+            "file_name": "N48.jpeg",
+            "path": null,
+            "width": 500,
+            "height": 349,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 15,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                156.0,
+                259.0,
+                179.0,
+                44.0
+            ],
+            "area": 7876.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

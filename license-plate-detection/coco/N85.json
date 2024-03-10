@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 217,
+            "folder": "../images/",
+            "file_name": "N85.jpeg",
+            "path": null,
+            "width": 441,
+            "height": 451,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 217,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                163.0,
+                357.0,
+                139.0,
+                70.0
+            ],
+            "area": 9730.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

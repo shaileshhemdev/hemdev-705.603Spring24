@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 13,
+            "folder": "../images/",
+            "file_name": "N75.jpeg",
+            "path": null,
+            "width": 1154,
+            "height": 1199,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 13,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                466.0,
+                680.0,
+                274.0,
+                57.0
+            ],
+            "area": 15618.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

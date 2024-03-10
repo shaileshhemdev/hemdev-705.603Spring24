@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 146,
+            "folder": "../images/",
+            "file_name": "N168.jpeg",
+            "path": null,
+            "width": 768,
+            "height": 1024,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 146,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                271.0,
+                514.0,
+                203.0,
+                47.0
+            ],
+            "area": 9541.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

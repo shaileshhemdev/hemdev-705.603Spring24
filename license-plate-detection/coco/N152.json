@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 116,
+            "folder": "../images/",
+            "file_name": "N152.jpeg",
+            "path": null,
+            "width": 919,
+            "height": 532,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 116,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                265.0,
+                247.0,
+                460.0,
+                100.0
+            ],
+            "area": 46000.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

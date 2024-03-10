@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 118,
+            "folder": "../images/",
+            "file_name": "N37.jpeg",
+            "path": null,
+            "width": 728,
+            "height": 485,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 118,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                77.0,
+                231.0,
+                123.0,
+                59.0
+            ],
+            "area": 7257.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

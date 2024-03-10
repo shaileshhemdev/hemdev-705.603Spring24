@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 11,
+            "folder": "../images/",
+            "file_name": "N138.jpeg",
+            "path": null,
+            "width": 480,
+            "height": 360,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 11,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                36.0,
+                64.0,
+                429.0,
+                104.0
+            ],
+            "area": 44616.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

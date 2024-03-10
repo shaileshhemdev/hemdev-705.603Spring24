@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 26,
+            "folder": "../images/",
+            "file_name": "N70.jpeg",
+            "path": null,
+            "width": 800,
+            "height": 530,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 26,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                186.0,
+                376.0,
+                209.0,
+                54.0
+            ],
+            "area": 11286.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

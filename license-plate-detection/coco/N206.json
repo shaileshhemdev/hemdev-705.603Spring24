@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 45,
+            "folder": "../images/",
+            "file_name": "N206.jpeg",
+            "path": null,
+            "width": 317,
+            "height": 215,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 45,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                121.0,
+                120.0,
+                94.0,
+                27.0
+            ],
+            "area": 2538.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

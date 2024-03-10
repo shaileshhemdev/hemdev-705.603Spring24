@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 4,
+            "folder": "../images/",
+            "file_name": "N88.jpeg",
+            "path": null,
+            "width": 610,
+            "height": 338,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 4,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                208.0,
+                89.0,
+                162.0,
+                84.0
+            ],
+            "area": 13608.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

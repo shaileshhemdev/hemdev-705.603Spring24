@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 200,
+            "folder": "../images/",
+            "file_name": "N86.jpeg",
+            "path": null,
+            "width": 640,
+            "height": 555,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 200,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                448.0,
+                273.0,
+                190.0,
+                65.0
+            ],
+            "area": 12350.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

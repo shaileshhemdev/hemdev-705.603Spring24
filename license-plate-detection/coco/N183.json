@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 144,
+            "folder": "../images/",
+            "file_name": "N183.jpeg",
+            "path": null,
+            "width": 400,
+            "height": 278,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 144,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                216.0,
+                155.0,
+                127.0,
+                35.0
+            ],
+            "area": 4445.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

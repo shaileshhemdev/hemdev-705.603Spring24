@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 21,
+            "folder": "../images/",
+            "file_name": "N129.jpeg",
+            "path": null,
+            "width": 774,
+            "height": 642,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 21,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                301.0,
+                351.0,
+                203.0,
+                51.0
+            ],
+            "area": 10353.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

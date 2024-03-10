@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 40,
+            "folder": "../images/",
+            "file_name": "N66.jpeg",
+            "path": null,
+            "width": 518,
+            "height": 458,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 40,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                163.0,
+                247.0,
+                157.0,
+                33.0
+            ],
+            "area": 5181.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 156,
+            "folder": "../images/",
+            "file_name": "N141.jpeg",
+            "path": null,
+            "width": 500,
+            "height": 416,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 156,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                150.0,
+                255.0,
+                198.0,
+                41.0
+            ],
+            "area": 8118.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

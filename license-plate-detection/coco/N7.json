@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 176,
+            "folder": "../images/",
+            "file_name": "N7.jpeg",
+            "path": null,
+            "width": 1920,
+            "height": 1080,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 176,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                1149.0,
+                649.0,
+                209.0,
+                53.0
+            ],
+            "area": 11077.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 1,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "num_plate",
+            "supercategory": null
+        }
+    ]
+}

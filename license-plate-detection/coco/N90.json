@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 219,
+            "folder": "../images/",
+            "file_name": "N90.jpeg",
+            "path": null,
+            "width": 418,
+            "height": 330,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 219,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                53.0,
+                206.0,
+                132.0,
+                26.0
+            ],
+            "area": 3432.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

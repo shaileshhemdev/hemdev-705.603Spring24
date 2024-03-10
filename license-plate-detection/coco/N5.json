@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 177,
+            "folder": "../images/",
+            "file_name": "N5.jpeg",
+            "path": null,
+            "width": 1920,
+            "height": 1080,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 177,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                938.0,
+                709.0,
+                235.0,
+                53.0
+            ],
+            "area": 12455.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 1,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "num_plate",
+            "supercategory": null
+        }
+    ]
+}

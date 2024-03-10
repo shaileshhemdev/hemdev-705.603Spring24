@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 192,
+            "folder": "../images/",
+            "file_name": "N4.jpeg",
+            "path": null,
+            "width": 3644,
+            "height": 2429,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 192,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                1326.0,
+                1464.0,
+                504.0,
+                143.0
+            ],
+            "area": 72072.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 1,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "num_plate",
+            "supercategory": null
+        }
+    ]
+}

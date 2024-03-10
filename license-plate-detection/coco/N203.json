@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 83,
+            "folder": "../images/",
+            "file_name": "N203.jpeg",
+            "path": null,
+            "width": 2047,
+            "height": 1365,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 83,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                765.0,
+                821.0,
+                493.0,
+                84.0
+            ],
+            "area": 41412.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

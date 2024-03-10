@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 183,
+            "folder": "../images/",
+            "file_name": "N68.jpeg",
+            "path": null,
+            "width": 800,
+            "height": 533,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 183,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                319.0,
+                262.0,
+                160.0,
+                33.0
+            ],
+            "area": 5280.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

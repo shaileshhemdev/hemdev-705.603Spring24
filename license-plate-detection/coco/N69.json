@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 187,
+            "folder": "../images/",
+            "file_name": "N69.jpeg",
+            "path": null,
+            "width": 1200,
+            "height": 800,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 187,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                637.0,
+                464.0,
+                203.0,
+                85.0
+            ],
+            "area": 17255.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

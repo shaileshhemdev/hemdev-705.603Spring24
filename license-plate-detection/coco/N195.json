@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 138,
+            "folder": "../images/",
+            "file_name": "N195.jpeg",
+            "path": null,
+            "width": 600,
+            "height": 450,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 138,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                186.0,
+                137.0,
+                181.0,
+                95.0
+            ],
+            "area": 17195.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

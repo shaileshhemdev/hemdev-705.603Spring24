@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 97,
+            "folder": "../images/",
+            "file_name": "N145.jpeg",
+            "path": null,
+            "width": 500,
+            "height": 234,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 97,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                233.0,
+                88.0,
+                199.0,
+                63.0
+            ],
+            "area": 12537.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

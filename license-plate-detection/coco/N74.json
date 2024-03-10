@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 16,
+            "folder": "../images/",
+            "file_name": "N74.jpeg",
+            "path": null,
+            "width": 500,
+            "height": 358,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 16,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                161.0,
+                210.0,
+                205.0,
+                40.0
+            ],
+            "area": 8200.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

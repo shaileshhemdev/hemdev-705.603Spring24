@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 130,
+            "folder": "../images/",
+            "file_name": "N235.jpeg",
+            "path": null,
+            "width": 750,
+            "height": 562,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 130,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                44.0,
+                128.0,
+                612.0,
+                263.0
+            ],
+            "area": 160956.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

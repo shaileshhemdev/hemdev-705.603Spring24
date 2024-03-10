@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 84,
+            "folder": "../images/",
+            "file_name": "N149.jpeg",
+            "path": null,
+            "width": 500,
+            "height": 333,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 84,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                186.0,
+                116.0,
+                138.0,
+                32.0
+            ],
+            "area": 4416.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

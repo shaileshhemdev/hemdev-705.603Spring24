@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 210,
+            "folder": "../images/",
+            "file_name": "N3.jpeg",
+            "path": null,
+            "width": 932,
+            "height": 699,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 210,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                73.0,
+                381.0,
+                187.0,
+                81.0
+            ],
+            "area": 15147.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 1,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "num_plate",
+            "supercategory": null
+        }
+    ]
+}

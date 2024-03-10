@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 161,
+            "folder": "../images/",
+            "file_name": "N6.jpeg",
+            "path": null,
+            "width": 1920,
+            "height": 1080,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 161,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                858.0,
+                611.0,
+                264.0,
+                65.0
+            ],
+            "area": 17160.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 1,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "num_plate",
+            "supercategory": null
+        }
+    ]
+}

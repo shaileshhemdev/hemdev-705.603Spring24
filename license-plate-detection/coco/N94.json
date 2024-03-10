@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 167,
+            "folder": "../images/",
+            "file_name": "N94.jpeg",
+            "path": null,
+            "width": 500,
+            "height": 355,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 167,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                63.0,
+                234.0,
+                180.0,
+                40.0
+            ],
+            "area": 7200.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

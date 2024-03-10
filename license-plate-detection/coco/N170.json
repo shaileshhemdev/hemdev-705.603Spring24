@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 47,
+            "folder": "../images/",
+            "file_name": "N170.jpeg",
+            "path": null,
+            "width": 800,
+            "height": 416,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 47,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                299.0,
+                337.0,
+                143.0,
+                49.0
+            ],
+            "area": 7007.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

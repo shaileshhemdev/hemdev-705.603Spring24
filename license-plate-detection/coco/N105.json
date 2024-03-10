@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 18,
+            "folder": "../images/",
+            "file_name": "N105.jpeg",
+            "path": null,
+            "width": 500,
+            "height": 289,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 18,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                360.0,
+                174.0,
+                74.0,
+                21.0
+            ],
+            "area": 1554.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

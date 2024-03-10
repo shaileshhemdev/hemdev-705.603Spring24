@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 143,
+            "folder": "../images/",
+            "file_name": "N222.jpeg",
+            "path": null,
+            "width": 304,
+            "height": 248,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 143,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                127.0,
+                122.0,
+                56.0,
+                34.0
+            ],
+            "area": 1904.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

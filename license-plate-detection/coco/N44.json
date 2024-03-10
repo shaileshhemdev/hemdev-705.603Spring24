@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 204,
+            "folder": "../images/",
+            "file_name": "N44.jpeg",
+            "path": null,
+            "width": 416,
+            "height": 431,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 204,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                113.0,
+                282.0,
+                144.0,
+                40.0
+            ],
+            "area": 5760.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

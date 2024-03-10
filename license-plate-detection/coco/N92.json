@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 201,
+            "folder": "../images/",
+            "file_name": "N92.jpeg",
+            "path": null,
+            "width": 500,
+            "height": 376,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 201,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                113.0,
+                209.0,
+                307.0,
+                51.0
+            ],
+            "area": 15657.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}

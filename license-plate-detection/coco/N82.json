@@ -1,0 +1,40 @@
+{
+    "images": [
+        {
+            "id": 186,
+            "folder": "../images/",
+            "file_name": "N82.jpeg",
+            "path": null,
+            "width": 960,
+            "height": 1280,
+            "depth": "3"
+        }
+    ],
+    "annotations": [
+        {
+            "image_id": 186,
+            "id": 0,
+            "segmented": "0",
+            "bbox": [
+                456.0,
+                722.0,
+                195.0,
+                56.0
+            ],
+            "area": 10920.0,
+            "segmentation": null,
+            "iscrowd": 0,
+            "pose": "Unspecified",
+            "truncated": "0",
+            "category_id": 0,
+            "difficult": "0"
+        }
+    ],
+    "categories": [
+        {
+            "id": 0,
+            "name": "number_plate",
+            "supercategory": null
+        }
+    ]
+}
