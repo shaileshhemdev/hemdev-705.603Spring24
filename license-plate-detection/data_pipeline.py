@@ -4,6 +4,7 @@ from pylabel import importer
 import os
 import pytesseract
 import re
+import deployment_udp_client
 
 class Pipeline:
     """
@@ -39,8 +40,9 @@ class Pipeline:
 
     """
     
-    def __init__(self, data_folder, dataset_name, images_sub_folder="images", annotations_sub_folder="annotations", 
-                 yolo_sub_folder="yolo/labels", coco_sub_folder="coco"):
+    def __init__(self, data_folder, dataset_name, video_stream_url, images_sub_folder="images", annotations_sub_folder="annotations", 
+                 yolo_sub_folder="yolo/labels", coco_sub_folder="coco", output_images_folder="alpr-images",
+                 image_width = 3840, image_height = 2160, original_image_folder="/original", cropped_image_folder="/cropped"):
         """ Initializes the Data Pipeline Class
 
         Parameters
@@ -64,7 +66,68 @@ class Pipeline:
         self._coco_sub_folder = self._data_folder + coco_sub_folder
         self._yolo_sub_folder = self._data_folder + yolo_sub_folder
         self._dataset_name = dataset_name
+        self._video_stream_url = video_stream_url
+        self._license_plate_images = data_folder + output_images_folder
+        self._original_image_folder = original_image_folder
+        self._cropped_image_folder = cropped_image_folder
+        self._image_width = image_width
+        self._image_height = image_height
+
+    def extract(self):
+        """ Reads the video stream to load the images
+
+        """
+        deployment_udp_client.stream_video(self._video_stream_url,self._license_plate_images + self._original_image_folder, self._image_width, self._image_height)
+
+    def transform(self):
+        """ Load all the raw images
+
+        """
+        # Get the directory for raw images
+        directory =  self._license_plate_images + self._original_image_folder
+
+        # Get directory for cropped images
+        cropped_image_dir = self._license_plate_images + self._cropped_image_folder
+        
+        # Run a loop of all images
+        for filename in os.listdir(directory):
+            f = os.path.join(directory, filename)
     
+            # checking if it is a file
+            if os.path.isfile(f):
+                original_img = cv.imread(f)
+                
+                # Crop the image to what we have seen as good dimension
+                #print(filename)
+                cropped_image = original_img[1250:3000 ,700 :3000 ]
+                
+                # Cropped image path
+                cropped_img_file_name = cropped_image_dir + "/" + filename
+
+                # Save the cropped image
+                cv.imwrite(cropped_img_file_name, cropped_image)
+
+
+    def load(self):
+        """ Load all the raw images
+
+        """
+        cropped_images = list()
+
+        # Get the directory for raw images
+        directory =  self._license_plate_images + self._cropped_image_folder
+
+        # Run a loop of all images
+        for filename in os.listdir(directory):
+            f = os.path.join(directory, filename)
+    
+            # checking if it is a file
+            if os.path.isfile(f):
+                cropped_img = cv.imread(f)
+                cropped_images.append(cropped_img)
+        
+        return cropped_images
+
     def convert_pascal_to_yolo_format(self, source_file):
         """ Executes the Pipeline to return yolo text file
         
