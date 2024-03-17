@@ -45,11 +45,11 @@ def stream_video(input_url, out_folder, width, height):
         print(file_name)
         cv2.imwrite(file_name, in_frame)
         image_counter += 1
-        #if cv2.waitKey(1) & 0xFF == ord('q'):  # Press 'q' to quit
-            #break
+        if cv2.waitKey(1) & 0xFF == ord('q'):  # Press 'q' to quit
+            break
         
     print(image_counter)
-    #process1.wait()
+    process1.wait()
     #cv2.destroyAllWindows()
 
 # Example usage

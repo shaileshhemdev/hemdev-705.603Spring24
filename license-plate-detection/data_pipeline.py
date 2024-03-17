@@ -67,8 +67,8 @@ class Pipeline:
         self._yolo_sub_folder = self._data_folder + yolo_sub_folder
         self._dataset_name = dataset_name
         self._video_stream_url = video_stream_url
-        self._license_plate_images = data_folder + output_images_folder
-        self._original_image_folder = original_image_folder
+        self._license_plate_images = data_folder + output_images_folder 
+        self._original_image_folder = original_image_folder 
         self._cropped_image_folder = cropped_image_folder
         self._image_width = image_width
         self._image_height = image_height
