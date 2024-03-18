@@ -4,7 +4,7 @@ import ffmpeg
 import sys
 import os
 
-def stream_video(input_url, out_folder, width, height):
+def stream_video(input_url, out_folder, width, height, img_counter=1):
     """
     Stream video from a given input URL using ffmpeg and display it with OpenCV.
 
@@ -33,7 +33,7 @@ def stream_video(input_url, out_folder, width, height):
         .run_async(pipe_stdout=True, pipe_stderr=True)
     )
 
-    image_counter = 1
+    image_counter = img_counter
     print(image_counter)
     while True:
         in_bytes = process1.stdout.read(width * height * 3)
@@ -42,14 +42,14 @@ def stream_video(input_url, out_folder, width, height):
         in_frame = np.frombuffer(in_bytes, np.uint8).reshape([height, width, 3])
 
         file_name = out_folder + "/" + "image" + str(image_counter) + ".jpeg"
-        print(file_name)
+
         cv2.imwrite(file_name, in_frame)
         image_counter += 1
-        if cv2.waitKey(1) & 0xFF == ord('q'):  # Press 'q' to quit
-            break
+        #if cv2.waitKey(1) & 0xFF == ord('q'):  # Press 'q' to quit
+            #break
         
     print(image_counter)
-    process1.wait()
+    #process1.wait()
     #cv2.destroyAllWindows()
 
 # Example usage

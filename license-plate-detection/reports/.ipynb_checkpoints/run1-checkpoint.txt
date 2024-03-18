@@ -1,0 +1,6 @@
+Model Results for NAI3NRU:
+		Accuracy = 100.00%
+		Precision = 29.63%
+	\Mean Levenshtein = 170.37%
+		Std Levenshtein = 170.37%
+

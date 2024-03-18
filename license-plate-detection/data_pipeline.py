@@ -1,6 +1,7 @@
 import numpy as np
 import cv2 as cv
 from pylabel import importer
+import sys
 import os
 import pytesseract
 import re
@@ -40,9 +41,9 @@ class Pipeline:
 
     """
     
-    def __init__(self, data_folder, dataset_name, video_stream_url, images_sub_folder="images", annotations_sub_folder="annotations", 
-                 yolo_sub_folder="yolo/labels", coco_sub_folder="coco", output_images_folder="alpr-images",
-                 image_width = 3840, image_height = 2160, original_image_folder="/original", cropped_image_folder="/cropped"):
+    def __init__(self, data_folder, video_stream_url, output_images_folder="alpr-images", original_image_folder="/original", cropped_image_folder="/cropped", 
+                 dataset_name="License Plate Recognition", images_sub_folder="images", annotations_sub_folder="annotations", 
+                 yolo_sub_folder="yolo/labels", coco_sub_folder="coco", image_width = 3840, image_height = 2160):
         """ Initializes the Data Pipeline Class
 
         Parameters
@@ -73,11 +74,11 @@ class Pipeline:
         self._image_width = image_width
         self._image_height = image_height
 
-    def extract(self):
+    def extract(self, img_counter=1):
         """ Reads the video stream to load the images
 
         """
-        deployment_udp_client.stream_video(self._video_stream_url,self._license_plate_images + self._original_image_folder, self._image_width, self._image_height)
+        deployment_udp_client.stream_video(self._video_stream_url,self._license_plate_images + self._original_image_folder, self._image_width, self._image_height,img_counter)
 
     def transform(self):
         """ Load all the raw images
@@ -97,22 +98,31 @@ class Pipeline:
             if os.path.isfile(f):
                 original_img = cv.imread(f)
                 
-                # Crop the image to what we have seen as good dimension
-                #print(filename)
-                cropped_image = original_img[1250:3000 ,700 :3000 ]
-                
-                # Cropped image path
-                cropped_img_file_name = cropped_image_dir + "/" + filename
+                if original_img is not None:
+                    # Crop the image to what we have seen as good dimension
+                    #print(filename)
+                    cropped_image_left = original_img[1500:3000 ,600 :1300 ]
+                    cropped_image_right = original_img[1500:3000 ,1300 :3000 ]
+                    
+                    # Image name split
+                    img_name_arr = filename.split('.')
+                    img_name = img_name_arr[0]
+                    img_ext = img_name_arr[1]
 
-                # Save the cropped image
-                cv.imwrite(cropped_img_file_name, cropped_image)
+                    # Cropped image path
+                    cropped_img_left_file_name = cropped_image_dir + "/" + img_name + "_left." + img_ext
+                    cropped_img_right_file_name = cropped_image_dir + "/" + img_name + "_right." + img_ext
+
+                    # Save the cropped image
+                    cv.imwrite(cropped_img_left_file_name, cropped_image_left)
+                    cv.imwrite(cropped_img_right_file_name, cropped_image_right)
 
 
     def load(self):
         """ Load all the raw images
 
         """
-        cropped_images = list()
+        resized_images = list()
 
         # Get the directory for raw images
         directory =  self._license_plate_images + self._cropped_image_folder
@@ -124,9 +134,12 @@ class Pipeline:
             # checking if it is a file
             if os.path.isfile(f):
                 cropped_img = cv.imread(f)
-                cropped_images.append(cropped_img)
+                
+                if cropped_img is not None:
+                    resized_image = cv.resize(cropped_img, (608, 608)) 
+                    resized_images.append(resized_image)
         
-        return cropped_images
+        return resized_images
 
     def convert_pascal_to_yolo_format(self, source_file):
         """ Executes the Pipeline to return yolo text file
@@ -254,11 +267,24 @@ class Pipeline:
             # Remove everything outside of alphanumeric characters letters for license plate are upper case
             license_plate_no = re.sub(r'[^A-Z0-9-]+', '', license_plate_no)
             return license_plate_no 
+
+# Example usage
+if __name__ == "__main__":
+    # Get command line arguments
+    if (len(sys.argv)>1):
+        video_stream_url  = sys.argv[1]
+        data_folder  = sys.argv[2]
+        img_counter  = sys.argv[3]
+        dataset_name  = "License Plate Detection"
+    else: 
+        video_stream_url = os.environ['video-stream-url']
+        data_folder  = os.environ['video-stream-image-folder']
+        dataset_name  = "License Plate Detection"
     
-    def letter_or_digit(self,s):
-        m = re.search(r'[a-z0-9]', s, re.I)
+    print("Starting process")
+    #in_file = 'udp://127.0.0.1:23000'  # Example UDP input URL
+    width = 3840  # Example width
+    height = 2160  # Example height
 
-        if m is not None:
-            return m.start()
-        return -1
-
+    pipeline = Pipeline(data_folder,dataset_name,video_stream_url)
+    pipeline.extract(int(img_counter))

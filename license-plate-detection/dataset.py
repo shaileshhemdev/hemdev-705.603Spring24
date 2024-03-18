@@ -32,13 +32,15 @@ class Object_Detection_Dataset:
         Get Validation data for the specified fold 
     """
     
-    def __init__(self, data_folder, n_folds=5):
+    def __init__(self, data_folder, vehicle_indices, n_folds=5):
         """ Initializes the Fraud_Dataset Class
 
         Parameters
         ----------
         data_folder : str
             The folder where all the images are stored which is our core dataset
+        vehicle_indices : ndarray
+            The indices from which a new image starts
         n_folds : int
             The number of folds needed from the data
 

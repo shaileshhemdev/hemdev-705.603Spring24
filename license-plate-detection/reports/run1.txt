@@ -1,0 +1,12 @@
+Model Results for NAI3NRU:
+		Accuracy = 100.00%
+		Precision = 29.63%
+		Mean Levenshtein = 1.70
+		Std Levenshtein = 1.70
+
+Model Results for MW5IVSU:
+		Accuracy = 0.00%
+		Precision = 0.00%
+		Mean Levenshtein = 7.00
+		Std Levenshtein = 7.00
+

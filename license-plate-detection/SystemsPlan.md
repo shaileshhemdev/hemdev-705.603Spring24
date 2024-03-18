@@ -218,7 +218,7 @@ We have assumed that following upstream human machine interactions would exist
         <b>High Resolution Cameras and Sensors:</b>We assume the cameras and sensor systems are able to provide a set of images related to the same license plate. This is important for the accuracy of the model since we want to arrive at our final prediction for license plate numbers using predictions from multiple images for the same license plate
     </li>
     <li>
-        <b>Ground Truth Data:</b>We have some test images with bounding boxes labelled so that we can compare our model's bounding boxes with them 
+        <b>Ground Truth Data:</b>We have some test images with bounding boxes labelled so that we can compare our model's bounding boxes with them.  
     </li>
 </ol>
 
@@ -228,7 +228,7 @@ We have researched for following resources that speak to what a financial instit
 
 <ol>
     <li>
-        <b>Reg 1:</b>TBD
+        <b>Automated License Plate Readers: State Statutes:</b>https://www.ncsl.org/technology-and-communication/automated-license-plate-readers-state-statutes
     </li>
 </ol>
 

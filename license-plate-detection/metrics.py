@@ -1,12 +1,6 @@
 import numpy as np
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import precision_score
-from sklearn.metrics import recall_score
-from sklearn.metrics import f1_score
-from sklearn.metrics import roc_auc_score
-from sklearn.metrics import average_precision_score
 from sklearn.metrics import accuracy_score
-from sklearn.metrics import balanced_accuracy_score
+from Levenshtein import distance as lev
 
 class Metrics:
     """
@@ -17,86 +11,55 @@ class Metrics:
     Methods
     -------
     generate_report()
-        Will generate a report for all the folds for which the model was run
+        Will generate a report for all the license plates for which the model was run
     run()
         Obtain the following metrics
         1. Accuracy
-        2. Balanced Accuracy
-        3. Specificity
-        4. Sensitivity
-        5. Precision
-        6. Recall
-        7. F1 Score
-        8. ROC AUC Score
-        9. Average Precision Score
+        2. Precision
+        3. Average Levenshtein
+        4. Std Deviation Levenshtein
 
     """
     def __init__(self):
         """ Initializes the Metrics Class
         """
 
-    def generate_report(self, accs, acc_bals, specificitys, sensitivitys, precs, recalls, f1s, roc_aucs, avg_precs, classifiers, report_file):
+    def generate_report(self, license_plate_numbers, report_file, model_results):
         """ Generates a Report and Stores it in the results directory
 
         Parameters
         ----------
-        acc : float
-            Accuracy of the test results. Not the best metric for this dataset
-        acc_bal : float
-            Balanced Accuracy of the test results. Takes into account the imbalance in the dataset
-        specificity : float
-            Calculated as True negatives / (True negatives + False Positives) - a good measure of how many times we got valid transactions right
-        sensitivity : float
-            Calculated as True positives / (True positives + False negatives) - a good measure of how many times we got fraudulent transactions right
-        Precision : float
-            A good measure of how many times we got fraudulent transactions right
-        Recall : float
-            A good measure of how many times we got valid transactions right
-        F1 Score : float
-            Harmonic Mean of Precision and Recall. A good metric for this model
-        ROC AUC : float
-            A good metric for this model as it measures optimality with precision and recall
-        Average Precision Score : float
-            A good alternatives for ROC AUC if imbalance is high
-        classifiers : ndarray
-            List of classifiers for which results are being reported
+        license_plate_numbers : ndarray
+            List of actual license plate numbers
         report_file : str
             The full path to the file where the results need to be stored
-
+        metrics : list
+            List of metrics for each license plate number
         """
 
         # Open a file
         f = open(report_file, "w")
 
         i = 0
-        for cls in classifiers:
-            acc         = accs[i]
-            acc_bal     = acc_bals[i]
-            specificity = specificitys[i]
-            sensitivity = sensitivitys[i]
-            prec        = precs[i]
-            recall      = recalls[i]
-            f1          = f1s[i]
-            roc_auc     = roc_aucs[i]
-            avg_prec    = avg_precs[i]
+        for lp in license_plate_numbers:
+            lp_metric   = self.run(lp,model_results[i][2],model_results[i][0])
+            acc         = lp_metric[0]
+            prec        = lp_metric[1]
+            lev_mean    = lp_metric[2]
+            lev_std    = lp_metric[3]
 
             i = i + 1
 
-            f.write(f"Model Results for {cls}:\n")
+            f.write(f"Model Results for {lp}:\n")
             f.write(f"\t\tAccuracy = {acc:.2%}\n")
-            f.write(f"\t\tBalanced Accuracy = {acc_bal:.2%}\n")
-            f.write(f"\t\tSpecificity = {specificity:.2%}\n")
-            f.write(f"\t\tSensitivity = {sensitivity:.2%}\n")
             f.write(f"\t\tPrecision = {prec:.2%}\n")
-            f.write(f"\t\tRecall = {recall:.2%}\n")
-            f.write(f"\t\tF1 Score = {f1:.2%}\n")
-            f.write(f"\t\tROC AUC Score = {roc_auc:.2%}\n")
-            f.write(f"\t\tAverage Precision Score = {avg_prec:.2%}\n")
+            f.write(f"\t\tMean Levenshtein = {lev_mean:.2f}\n")
+            f.write(f"\t\tStd Levenshtein = {lev_std:.2f}\n")
             f.write("\n")
 
         f.close() 
 
-    def run(self, y_val, y_pred):
+    def run(self, y_val, y_pred, y_pred_best):
         """ Calculates the various metrics
 
         Parameters
@@ -104,43 +67,65 @@ class Metrics:
         y_val : ndarray
             The ground truth for the data
         y_pred : ndarray
-            The predicted values for the observations
-        dataset : str
-            The type of dataset. Defaults to 'Testing'
+            The predicted set of values from all the images
 
         Returns
         ----------
         acc : float
-            Accuracy of the test results. Not the best metric for this dataset
-        acc_bal : float
-            Balanced Accuracy of the test results. Takes into account the imbalance in the dataset
-        specificity : float
-            Calculated as True negatives / (True negatives + False Positives) - a good measure of how many times we got valid transactions right
-        sensitivity : float
-            Calculated as True positives / (True positives + False negatives) - a good measure of how many times we got fraudulent transactions right
+            Final accuracy of the best prediction
         Precision : float
-            A good measure of how many times we got fraudulent transactions right
-        Recall : float
-            A good measure of how many times we got valid transactions right
-        F1 Score : float
-            Harmonic Mean of Precision and Recall. A good metric for this model
-        ROC AUC : float
-            A good metric for this model as it measures optimality with precision and recall
-        Average Precision Score : float
-            A good alternatives for ROC AUC if imbalance is high
+            A good measure of how many times we got the correct license plate number
+        lev_mean : float
+            Mean for the Levenshtein distance
+        lev_std : float
+            Standard deviation for the Levenshtein distance
         """
-        # Get the core metrics from confusion matrix
-        tn, fp, fn, tp = confusion_matrix(y_val, y_pred).ravel()
+        # Get a list of repeat values for 
+        y_actuals = np.repeat(y_val, len(y_pred))
 
-        # Initialize Metric Arrays 
-        acc             = accuracy_score(y_val, y_pred) 
-        balanced_acc    = balanced_accuracy_score(y_val, y_pred) 
-        specificity     = tn / (tn + fp)
-        sensitivity     = tp / (tp + fn)
-        precision       = precision_score(y_val, y_pred)
-        recall          = recall_score(y_val, y_pred)
-        f1              = f1_score(y_val, y_pred)
-        roc_auc         = roc_auc_score(y_val, y_pred)
-        avg_prec_score  = average_precision_score(y_val, y_pred)
+        # Compute the precision & average levinstein distance
+        lev_list = list()
+        tp, fp = 0, 0
+        i = 0
+        for y in y_pred:
+            lev_list.append(self.get_distance(y_actuals[i],y))
 
-        return (acc, balanced_acc, specificity, sensitivity, precision, recall, f1, roc_auc, avg_prec_score)
+            # Calculate the true positives and false positives
+            if (y == y_val):
+                tp += 1
+            else:
+                fp += 1
+
+            i += 1
+        if (len(lev_list)==0):
+            lev_list.append(self.get_distance(y_val,y_pred_best))
+
+        # Get Average Lev for all predictions
+        lev_mean = np.mean(np.array(lev_list))
+        lev_std = np.mean(np.array(lev_list))
+
+        # Compute additional metrics
+        acc             = accuracy_score(np.array([y_val]), np.array([y_pred_best])) 
+        if (len(y_pred)==0):
+            precision = 0
+        else:
+            precision       = tp / (tp + fp)
+
+        return (acc, precision, lev_mean, lev_std)
+    
+    def get_distance(self, actual, predicted):
+       """ Calculates the distance between the actual and prediced license plate
+
+        Parameters
+        ----------
+        actual : str
+            The actual license plate number
+        predicted : str
+            The predictedlicense plate number
+
+        Returns
+        ----------
+        dist : int
+            Levenshtein Distance
+        """
+       return lev(predicted, actual)
