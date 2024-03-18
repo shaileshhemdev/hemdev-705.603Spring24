@@ -2,11 +2,14 @@
 
 ## Overview
 
-In this repository we are building License Plate Recognition Dataset. [System Plan](SystemPlan.md) outlines the thought process employed in firming scope & requirements, design methodology adopted and deployment & operations. It provides a simple yet complete end to end view of how to develop a machine learning system that can be leveraged in production 
+In this repository we are building License Plate Recognition Dataset. [System Plan](SystemsPlan.md) outlines the thought process employed in firming scope & requirements, design methodology adopted and deployment & operations. It provides a simple yet complete end to end view of how to develop a machine learning system that can be leveraged in production 
 
-## Dataset
+## Running on Local
 
-You can obtain the dataset from here: https://jhu.instructure.com/courses/66217/files/10067213?wrap=1
+```
+python model.py udp://127.0.0.1:23000 /Users/shaileshhemdev/ai/ai-enabledsystems/workspace/license-plates/ prediction1/ original/ cropped/ models/ 2 1
+
+```
 
 ## Pre-requisites prior to executing the notebook
 
