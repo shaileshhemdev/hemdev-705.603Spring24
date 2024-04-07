@@ -70,7 +70,7 @@ Note: See the volume mapping - this is needed for the data-folder where things l
 
 #### Docker Run Example
 
-![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/ForecastingImageRun.png?raw=true)
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/ForecastingServiceDockerRun.png?raw=true)
 
 ## API Usage
 
