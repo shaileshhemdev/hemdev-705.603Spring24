@@ -1,0 +1,9 @@
+pandas
+numpy
+scikit-learn
+statsmodels
+pmdarima
+plotly
+holidays==0.24
+prophet==1.1.1
+flask
