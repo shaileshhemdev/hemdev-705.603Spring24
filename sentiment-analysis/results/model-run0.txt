@@ -1,7 +1,24 @@
-Model Results for twitter-roberta-base:
-		Accuracy = 67.50%
-		Balanced Accuracy = 46.47%
-		Precision = 79.57%
-		Recall = 67.50%
-		F1 Score = 72.60%
+Model Results for twitter-roberta-base (Training) :
+		Accuracy = 73.00%
+		Balanced Accuracy = 55.27%
+		Precision = 79.15%
+		Recall = 73.00%
+		F1 Score = 75.39%
+		Mean Reciprocal Rank = 85.67%
+
+Model Results for twitter-roberta-base (Testing) :
+		Accuracy = 74.50%
+		Balanced Accuracy = 64.59%
+		Precision = 83.53%
+		Recall = 74.50%
+		F1 Score = 78.05%
+		Mean Reciprocal Rank = 86.67%
+
+Model Results for twitter-roberta-base (Validation) :
+		Accuracy = 70.50%
+		Balanced Accuracy = 58.47%
+		Precision = 82.23%
+		Recall = 70.50%
+		F1 Score = 75.05%
+		Mean Reciprocal Rank = 84.67%
 

@@ -22,15 +22,14 @@ class Metrics:
         3. Precision
         4. Recall
         5. F1 Score
-        6. ROC AUC Score
-        7. Average Precision Score
+        6. Mean Reciprocal Rank
 
     """
     def __init__(self):
         """ Initializes the Metrics Class
         """
 
-    def generate_report(self, accs, acc_bals, precs, recalls, f1s, classifiers, report_file):
+    def generate_report(self, accs, acc_bals, precs, recalls, f1s, mrrs, classifiers, report_file):
         """ Generates a Report and Stores it in the results directory
 
         Parameters
@@ -45,6 +44,8 @@ class Metrics:
             A good measure of how many times we got valid transactions right
         F1 Score : float
             Harmonic Mean of Precision and Recall. A good metric for this model
+        Mean Reciprocal Ranks : float
+            Calculates the reciprocal rank depending on how far the value is and then uses it to calculate the mean from the samples
         classifiers : ndarray
             List of classifiers for which results are being reported
         report_file : str
@@ -62,6 +63,7 @@ class Metrics:
             prec        = precs[i]
             recall      = recalls[i]
             f1          = f1s[i]
+            mrr         = mrrs[i]
 
             i = i + 1
 
@@ -71,6 +73,7 @@ class Metrics:
             f.write(f"\t\tPrecision = {prec:.2%}\n")
             f.write(f"\t\tRecall = {recall:.2%}\n")
             f.write(f"\t\tF1 Score = {f1:.2%}\n")
+            f.write(f"\t\tMean Reciprocal Rank = {mrr:.2%}\n")
             f.write("\n")
 
         f.close() 
@@ -99,6 +102,8 @@ class Metrics:
             A good measure of how many times we got valid transactions right
         F1 Score : float
             Harmonic Mean of Precision and Recall. A good metric for this model
+        Mean Reciprocal Rank : float
+            Calculates the reciprocal rank depending on how far the value is and then uses it to calculate the mean from the samples
 
         """
 
@@ -108,5 +113,6 @@ class Metrics:
         precision       = precision_score(y_val, y_pred, average='weighted')
         recall          = recall_score(y_val, y_pred, average='weighted')
         f1              = f1_score(y_val, y_pred, average='weighted')
+        mrr             = np.mean(1 /  np.abs(np.abs(y_val - y_pred) + 1))
 
-        return (acc, balanced_acc, precision, recall, f1)
+        return (acc, balanced_acc, precision, recall, f1, mrr)

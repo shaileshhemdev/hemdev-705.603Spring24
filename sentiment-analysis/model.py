@@ -147,8 +147,6 @@ class Sentiment_Analysis_Model:
         # Get reviews
         preprocessed_text = preprocessed_series.values.tolist()
 
-        print(preprocessed_text)
-            
         # Analyze sentiment for each text
         sentiments = [self.analyze_sentiment(text[:2000]) for text in text_array]
         
