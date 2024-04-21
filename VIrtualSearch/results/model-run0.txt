@@ -1,0 +1,7 @@
+Model Results for twitter-roberta-base:
+		Accuracy = 67.50%
+		Balanced Accuracy = 46.47%
+		Precision = 79.57%
+		Recall = 67.50%
+		F1 Score = 72.60%
+

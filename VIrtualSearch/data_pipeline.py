@@ -184,7 +184,7 @@ class Text_Pipeline:
             The trimmed text
 
         """
-        return  " ".join(input_text.split())
+        return  " ".join(str(input_text).split())
 
     @staticmethod
     def remove_punctuation(input_text):
@@ -295,10 +295,10 @@ class Text_Pipeline:
             The tag associated for the word
 
         """
-        tag = nltk.pos_tag([word])[0][1][0].upper()
-        tag_dict = {"J": wordnet.ADJ,
-                    "N": wordnet.NOUN,
-                    "V": wordnet.VERB,
-                    "R": wordnet.ADV}
+        tag = nltk.pos_tag([word])[0][1][0].lower()
+        tag_dict = {"j": wordnet.ADJ,
+                    "n": wordnet.NOUN,
+                    "v": wordnet.VERB,
+                    "r": wordnet.ADV}
 
         return tag_dict.get(tag, wordnet.NOUN)
