@@ -26,7 +26,7 @@ This repository provides a prototype implementation of an end to end service tha
 
 * Instead of above step, you can also use the notebook sentiment_analysis_test_nb.ipynb. 
 
-![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/FraudServiceTestingLocal.png?raw=true)
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/SentimentAnalysisTestingLocal.png?raw=true)
 
 ## Docker
 
