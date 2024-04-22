@@ -49,7 +49,7 @@ Following are the goals of the system
         <b>User:</b>Users are able to provide additional contextual parameters to aid the sentiment detection
     </li>
     <li>
-        <b>Model:</b>Model should have high accuracy
+        <b>Model:</b>Model should predict the inferred rating or sentiment very close to the actual rating or sentiment
     </li>
 </ol>
 
@@ -63,6 +63,7 @@ The above goals can be expressed in the following success criteria
         <ol>
             <li>Model should be able to handle large amounts of text</li>
             <li>Metrics should enable identifying the sentiment close to actual rating. Since a rating of 5 and 4 are not far apart and we should not penalize the model for this, metrics like Accuracy are not going to be good ones. Instead <b> Mean Reciprocal Rank </b> and <b>Precision</b> are good metrics as they keep this distance into account</li>
+            <li>It should allow comparing different models</li>
             <li>It should have a very high mean reciprocal rank  (>80%) and high recall (>70%)</li>
         </ol>
     </li>
@@ -84,6 +85,7 @@ Following are the assumptions made by the system
 
 <ol>
     <li>All data needed for the system is collected and accessible by the system</li>
+    <li>All text is in English language</li>
     <li>Changes in data such as additional attributes or value enumerations or data types are communicated in advance to the system in order to adapt and adjust before these changes are put into production</li>
     <li>Sufficient guard rails are present upstream to foster trust in the data and ensuring data is accurate</li>
     <li>Sufficient validations are in place upstream to avoid incomplete or missing data</li>
@@ -101,13 +103,14 @@ Based on the goals we come up with the following requirements
         <b>Functional: </b>Here are the functional requirements of the system
         <ol>
             <li>System should predict if a sentiment in a text is Positive, Negative or Neutral</li>
-            <li>System should enable the user (customer) to provide additional context</li>
-            <li>System should allow authorized users (business users of financial institution) to test random text to measure the performance of the system</li>
+            <li>System should optionally have more granular sentiments that can be mapped one to one to a rating</li>
+            <li>System should optionally be able to get and use additional contextual attributes to influence the sentiment</li>
+            <li>System should allow authorized users (business users) to test random text to measure the performance of the system</li>
            <li>System should allow authorized users (machine learning engineers) to test different models</li>
            <li>System should allow authorized users (machine learning engineers) to retrain models on existing data</li>
-           <li>System should at least 70% Recall</li>
+           <li>System should at least 70% Accuracy</li>
            <li>System should at least 90% Precision</li>
-           <li>System should at least 90% Accuracy</li>
+           <li>System should at least 90% Mean Reciporal Score</li>
         </ol>
     </li>
     <li>
@@ -139,6 +142,8 @@ Here are some of the harms that we see
 Here are some of the causes that lead to mistakes
 
 <ol>
+    <li>Conflicting statements in the review can impact the model's prediction</li>
+    <li>Review text is large enough to break the system and truncating it leads to bad predictions</li>
     <li>Data Systems are breached where the data used for training is corrupted or manipulated</li>
     <li>Bugs in upstream systems lead to inaccurate or incomplete data</li>
     <li>Model performs well during training and even validation but not in actual field</li>
@@ -155,22 +160,25 @@ Our methodology involves the following Software Development Lifecycle processes
 
 <ol>
     <li>
-        <b>Data Analysis:</b>In this phase sample datasets or subsets of sample data would be loaded into local development workspaces such as Jupyter notebooks to help understand the data. We will build visualizations and the purpose here would be to get some clues or intuition on what potentially could be affecting the end result. We have done that for this dataset in a notebook under <b>analysis/exploratory_data_analysis.ipynb</b>. In this notebook we are using direct pandas and exploring the data to get some intuition on what could be good candidate features, what cleansing and normalizing we need to do on the data and what models might work out
+        <b>Data Analysis:</b>In this phase sample datasets or subsets of sample data would be loaded into local development workspaces such as Jupyter notebooks to help understand the data. We will build visualizations and the purpose here would be to get some clues or intuition on what potentially could be affecting the end result removing unused features. We have done that for this dataset in a notebook under <b>analysis/exploratory_data_analysis.ipynb</b>. In this notebook we are using direct pandas and exploring the data to get some intuition on what could be good candidate features, what cleansing and derivations / transformations we need to do on the data
     </li>
     <li>
-        <b>Dataset Processing:</b>We have leveraged a module <b>dataset.py</b> with a class <b>Text_Pipeline</b> which has functions to prepare the text. It removes whitespace, punctuation, stop words, converts numbers 
+        <b>ETL Processing:</b>We have leveraged a module <b>etl_pipeline.py</b> with a class <b>ETL_Pipeline</b> which has functions to process the data namely Extract, Transform and Load where we apply the transformations and noise reduction as established from the above Data Analysis steps. We also store a <b>transformed_reviews.csv</b> file for efficient processing in the future for the training data
     </li>
     <li>
-        <b>Data Partitioning:</b>We have leveraged a module <b>data_pipeline.py</b> with a class <b>Sentiment_Analysis_Dataset</b> which employs a K-Fold (default folds 5) to create training and testing data subsets. We use these subsets to provide the training and testing datasets to consumers of this class. There is also a get_validation_dataset method that applies a split from the training data as validation data. 
+        <b>Text Processing:</b>We have leveraged a module <b>data_pipeline.py</b> with a class <b>Text_Pipeline</b> which has functions to prepare the text. It removes whitespace, punctuation, stop words, converts numbers 
     </li>
     <li>
-        <b>Model Training and Metrics</b>We have leveraged a module <b>metrics.py</b> with a class <b>Metrics</b> to return metrics on testing data as well as to generate a report. There is a notebook under <b>analysis/model_performance.ipynb</b> that leverages all these classes and simulates metrics through various classifiers we have tried. We have used multiple metrics namely Accuracy, Balanced Accuracy, Sensitivity, Specificity, Precision, Recall, F1 Score, ROC AUC Score and Average Precision Score. Of these <b>ROC AUC Score</b>, <b> F1 Score </b> and <b> Balanced Accuracy </b> is what we have deemed relevant for this dataset. Accuracy is ruled out since given the heavy imbalance of the class labels, we can get high accuracy even when the model is performing poorly (see the results for Ada Boosting as an example). 
+        <b>Data Partitioning:</b>We have leveraged a module <b>dataset.py</b> with a class <b>Sentiment_Analysis_Dataset</b> which employs a K-Fold (default folds 5) to create training, validation and testing data subsets. We use these subsets to provide the training, validation and testing datasets to consumers of this class. 
     </li>
     <li>
-        <b>Model Selection Analysis:</b>We have tried 1 classifiers Transformer with <b>cardiffnlp/twitter-roberta-base-sentiment-latest</b> model
+        <b>Model Training and Metrics</b>We have leveraged a module <b>metrics.py</b> with a class <b>Metrics</b> to return metrics on testing data as well as to generate a report. There is a notebook under <b>analysis/model_performance.ipynb</b> that leverages all these classes and simulates metrics through various classifiers we have tried. We have used multiple metrics namely Accuracy, Balanced Accuracy, Precision, Recall, F1 Score and Mean Reciprocal Rank. Of these <b>Mean Reciprocal Rank</b>, <b> Precision </b> and <b> Recall </b> is what we have deemed relevant for this dataset. Most metrics are also using wieghted strategies given this is a multi class problem
     </li>
     <li>
-        <b>Deployment Strategy:</b>We have packaged the interface into a Flask app in the module <b>sentiment_analysis_service.py</b>. This app exposes a REST API interface and performs the cleansing, feature selection and training of the model during the start up phase. It exposes 2 end points one for '/stats' that sends testing split using the Sentiment Analysis Dataset module to get the statistics which we have discussed in the Metrics. The second end point is '/get-sentiment' that takes in a payload for a text reviews and returns sentiments. We also have a <b>sentiment_analysis_service_test_nb.ipynb</b> Notebook that starts this service to test it on local
+        <b>Model Selection Analysis:</b>We have tried 1 classifiers Transformer with <b>cardiffnlp/twitter-roberta-base-sentiment-latest</b> model given the time available but future work involves running through other transformers and using prompt design to leverage Large Language Models
+    </li>
+    <li>
+        <b>Deployment Strategy:</b>We have packaged the interface into a Flask app in the module <b>sentiment_analysis_service.py</b>. This app exposes a REST API interface and performs the cleansing, feature selection and training of the model during the start up phase. It exposes 1 end points namely '/get-sentiment' that takes in a payload for a text reviews and returns sentiments. We also have a <b>sentiment_analysis_service_test_nb.ipynb</b> Notebook that starts this service to test it on local
     </li>
 </ol>
 
@@ -192,10 +200,10 @@ Our overall system design involves the following key components
         <b>Dataset:</b>This component will provide relevant portions of the training, validation and test datasets that can be leveraged by other modules
     </li>
     <li>
-        <b>Training:</b>This component will train the model and perform analysis such as cross validation or multi fold analysis to ensure that will enable choosing the best hyperparameters for the model and ensure that the model is robust across all the combinations of the data 
+        <b>Training:</b>This component will train the model and perform analysis such as cross validation or multi fold analysis to ensure that will enable choosing the best hyperparameters for the model and ensure that the model is robust across all the combinations of the data. <b>Note:</b> At the moment we are using a pre trained model and not training it on our dataset largely due to them needing a lot of time and resources
     </li>
     <li>
-        <b>Testing:</b>This component will enable testing the trained models both on previously seen data such as a subset from the original dataset but also from never seen before data. 
+        <b>Testing:</b>This component will enable testing the trained models both on previously seen data such as a subset from the original dataset but also from never seen before data. <b>Note:</b> Given the size of the overall data 1M we have applied a strategy of taking 200 random records from the split data and computing metrics for it to see if they are meeting our requirements. There is a file saved for an attempt made on 1M records and it was able to run through 70000 records over a few hours
     </li>
     <li>
         <b>Metrics:</b>This component will provide the needed metrics on the model for the dataset provided persisting it for traceability
@@ -224,22 +232,7 @@ We have assumed that following upstream human machine interactions would exist
 
 #### Regulations
 
-We have researched for following resources that speak to what a financial institution needs to be aware of and in compliance with 
-
-<ol>
-    <li>
-        <b>OCC:</b>https://www.occ.treas.gov/news-issuances/bulletins/2019/bulletin-2019-37.html
-    </li>
-    <li>
-        <b>CFPB:</b>https://www.consumerfinance.gov/rules-policy/regulations/1005/6/
-    </li>
-    <li>
-        <b>FDIC:</b>https://www.fdic.gov/resources/supervision-and-examinations/examination-policies-manual/section9-1.pdf
-    </li>
-    <li>
-        <b>DOJ:</b>https://www.justice.gov/archives/jm/criminal-resource-manual-958-fraud-affecting-financial-institution
-    </li>
-</ol>
+We have not found any relevant regulations that we need to be aware of though we expect upstream systems to mask or tokenize sensitive data accidently put into the reviews
 
 ### OPERATIONS
 
@@ -269,7 +262,7 @@ We will need to set up some monitors to get real time feedback on the following
         <b>Model Performance:</b>Feedback from the user engagement to tell us real time if the prediction was accurate or not
     </li>
     <li>
-        <b>Re-training:</b>As we collect new transactions we want the service to periodically re-train on the fresh data with a mix between latest and historical
+        <b>Re-training:</b>As we collect new reviews we want the service to periodically re-train on the fresh data with a mix between latest and historical
     </li>
 </ol>
 

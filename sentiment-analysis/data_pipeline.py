@@ -52,7 +52,7 @@ class Text_Pipeline:
                     "R": wordnet.ADV}
 
 
-    def preprocess(self, series):
+    def preprocess(self, series, params=None):
         """ Preprocesses the series of text
 
         Parameters
@@ -67,7 +67,7 @@ class Text_Pipeline:
         """
         # Apply preprocessing on the entire series
         #return series.apply(Text_Pipeline.preprocess_text)
-        return series.apply(lambda x: Text_Pipeline.preprocess_text(x, self.number_handling))
+        return series.apply(lambda x: Text_Pipeline.preprocess_text(x, self.number_handling, params))
 
     def encode(self, series, encoding_type="TFIDF"):
         """ Encodes the series 
@@ -106,7 +106,7 @@ class Text_Pipeline:
             return TfidfVectorizer()
 
     @staticmethod
-    def preprocess_text(input_text, number_handling):
+    def preprocess_text(input_text, number_handling, params=None):
         """ Preprocesses the text
 
         Parameters
@@ -140,9 +140,15 @@ class Text_Pipeline:
         # Remove stop words
         filtered_words = Text_Pipeline.remove_stopwords(transformed_text)
 
-        # Lemmatize
-        lemmatizer = WordNetLemmatizer()
-        transformed_text = ' '.join([lemmatizer.lemmatize(w, Text_Pipeline.get_wordnet_pos(w)) for w in filtered_words])
+        # Lemmatize unless disabled
+        if (params is not None):
+            should_lemmatize = params["lemmatize"]
+        else:
+             should_lemmatize = True
+        if (should_lemmatize):
+            lemmatizer = WordNetLemmatizer()
+            transformed_text = ' '.join([lemmatizer.lemmatize(w, Text_Pipeline.get_wordnet_pos(w)) for w in filtered_words])
+        
         return transformed_text
     
     @staticmethod

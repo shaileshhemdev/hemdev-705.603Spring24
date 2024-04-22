@@ -105,7 +105,8 @@ class Sentiment_Analysis_Model:
             s = pd.Series(X_test[i:end]) 
 
             # Obtain pre processed series
-            preprocessed_series = self.text_pipeline.preprocess(s)
+            params = {"lemmatize": False}
+            preprocessed_series = self.text_pipeline.preprocess(s, params)
 
             # Get reviews
             preprocessed_text = preprocessed_series.values.tolist()
