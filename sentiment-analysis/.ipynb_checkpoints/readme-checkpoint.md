@@ -106,7 +106,7 @@ We have tried the following models
 
 <ul>
     <li>
-        <b>cardiffnlp/twitter-roberta-base-sentiment-latest:</b> Able to get close to 90% Mean Reciprocal Rate, Precision > 80%, Recall > 70% and 80% Accuracy. 
+        <b>cardiffnlp/twitter-roberta-base-sentiment-latest:</b> Able to get close to 90% Mean Reciprocal Rate, Precision > 80%, Recall > 70% and 80% Accuracy. Model does not do well with ambiguous reviews such as "I hated it but I also loved it!" where it prefers the positive over the negative (should be neutral IMO)
     </li>
    
 </ul>
