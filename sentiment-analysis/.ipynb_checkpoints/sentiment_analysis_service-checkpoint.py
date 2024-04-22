@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request, jsonify
 import sys
 import os
+import nltk
 
 from transformers import pipeline
 from data_pipeline import Text_Pipeline 
@@ -9,7 +10,6 @@ from etl_pipeline import ETL_Pipeline
 from dataset import Sentiment_Analysis_Dataset
 from model import Sentiment_Analysis_Model
 from metrics import Metrics
-import nltk
 
 app = Flask(__name__)
 
@@ -117,7 +117,7 @@ if __name__ == "__main__":
     3. Initialize the Metrics class used to generate and provide latest statistics
     4. Initialize the Sentiment_Analysis_Model to train the classifier on the training data  
     """
-    flaskPort = 8786
+    flaskPort = 8796
 
     # Get command line arguments
     if (len(sys.argv)>1):
