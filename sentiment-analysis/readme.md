@@ -106,7 +106,7 @@ We have tried the following models
 
 <ul>
     <li>
-        <b>cardiffnlp/twitter-roberta-base-sentiment-latest:</b>
+        <b>cardiffnlp/twitter-roberta-base-sentiment-latest:</b> Able to get close to 90% Mean Reciprocal Rate, Precision > 80%, Recall > 70% and 80% Accuracy. 
     </li>
    
 </ul>
@@ -115,3 +115,7 @@ We have tried the following models
 ## Troubleshooting
 
 * As a part of running from local or through docker image, we have to pass arguments for the folder where the  training data is. 
+
+## Future Work
+
+Plan to look at other models available from hugging face, additional LLMs and training them on this dataset
