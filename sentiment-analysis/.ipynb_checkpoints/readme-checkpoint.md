@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository provides a prototype implementation of an end to end service that can detect sentiments for a set of text reviews. [System Plan](SystemPlan.md) outlines the thought process employed in firming scope & requirements, design methodology adopted and deployment & operations. It provides a simple yet complete end to end view of how to develop a machine learning system that can be leveraged in production 
+This repository provides a prototype implementation of an end to end service that can detect sentiments for a set of text reviews. [System Plan](SystemsPlan.md) outlines the thought process employed in firming scope & requirements, design methodology adopted and deployment & operations. It provides a simple yet complete end to end view of how to develop a machine learning system that can be leveraged in production 
 
 ## Local Development Environment used for building image
 
