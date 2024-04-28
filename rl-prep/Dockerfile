@@ -3,7 +3,7 @@ COPY . ./
 RUN pip3 install -r requirements.txt
 
 ENV data-folder '/'
-ENV training-data-file 'transactions-1.csv'
+ENV training-data-file 'email_campaign_data.csv'
 
-CMD ["fraud_service.py"]
+CMD ["email_campaign_service.py"]
 ENTRYPOINT ["python"]

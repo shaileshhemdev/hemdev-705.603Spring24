@@ -56,14 +56,17 @@ def get_next_action():
     action = request_details["action"]
 
     # Create Email campaign data
-    email_campaign_data = EmailCampaignField(df_merge_recd,state, states)
+    email_campaign_data = EmailCampaignField(df,state, states)
     email_campaign_data.make_action(action)
 
     # Exploit to get the next best action
-    next_action = np.argmax(q_table[email_campaign_data.get_state()]) 
-    print(type(next_action))
+    next_state = q_table[email_campaign_data.get_state()]
+    candidate_actions = np.delete(next_state, [action])
+
+    next_action = np.argmax(candidate_actions) 
+    
     # Return the result as Json
-    return jsonify({"next_action":str(next_action)})
+    return jsonify({"next_action": next_action.item()})
 
 if __name__ == "__main__":
     """ Initializes the Email Campaign Service Class
@@ -73,16 +76,16 @@ if __name__ == "__main__":
 
     # Load the Q Table
     q_table_df = pd.read_csv('q_table.csv')
-    q_table = q_table_df.values
+    q_table = q_table_df[["Subject Id","Day of Week","Tenure Group","Email Domain","Age Group","Gender","Type"]].values
     print('Successfully obtained Q Table')
 
     # Load the transformed data 
-    df_merge_recd = pd.read_csv('email_campaign_data.csv')
+    df = pd.read_csv('email_campaign_data.csv')
     print('Successfully obtained Campaign Data')
 
     # Initialize the Email Campaign Field
     starting_state = (1,0,0,0,0,0,0)
-    email_campaign_field = EmailCampaignField(df_merge_recd,starting_state)
+    email_campaign_field = EmailCampaignField(df,starting_state)
     states = email_campaign_field.get_states()
 
     # Now that all the setup has been done start the service
