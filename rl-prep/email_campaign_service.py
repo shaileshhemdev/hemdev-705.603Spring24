@@ -61,9 +61,10 @@ def get_next_action():
 
     # Exploit to get the next best action
     next_state = q_table[email_campaign_data.get_state()]
-    candidate_actions = np.delete(next_state, [action])
-
-    next_action = np.argmax(candidate_actions) 
+    print(next_state)
+    #next_state[action] = -200.00
+    print(next_state)
+    next_action = np.argmax(next_state) 
     
     # Return the result as Json
     return jsonify({"next_action": next_action.item()})
@@ -75,8 +76,8 @@ if __name__ == "__main__":
     flaskPort = 8786
 
     # Load the Q Table
-    q_table_df = pd.read_csv('q_table.csv')
-    q_table = q_table_df[["Subject Id","Day of Week","Tenure Group","Email Domain","Age Group","Gender","Type"]].values
+    q_table_df = pd.read_csv('q_table_bak.csv')
+    q_table = q_table_df[["Day of Week","Tenure Group","Email Domain","Age Group","Gender","Type"]].values
     print('Successfully obtained Q Table')
 
     # Load the transformed data 
