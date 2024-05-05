@@ -57,9 +57,10 @@ docker buildx build -t "tomsriddle/rl-email-campaign:1.0" --load --platform linu
 To run the image use following
 
 ```
-docker run -p 8788:8786 -v /Users/shaileshhemdev/ai/ai-enabledsystems/output:/workspace/shared-data -e data-folder=/workspace/shared-data/ -e "tomsriddle/rl-email-campaign:1.0"
+docker run -p 8788:8786 -v <Physical Host Folder>:/workspace/shared-data -e data-folder=/workspace/shared-data/email-campaign/ -e sent-emails-file=sent_emails.csv -e responded-emails-file=responded.csv -e customers-file=userbase.csv "tomsriddle/rl-email-campaign:1.0"
 
 ```
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/EmailCampaignImageRun.png?raw=true)
 
 ## API Usage
 
@@ -90,4 +91,48 @@ Response Body
 
 
 ![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/GetNextActionAPI.png?raw=true)
+
+### Get Campaign Audience
+
+This provides a mechanism to get audience permutations with high conversions
+
+```
+POST http://localhost:8788/campaign-audience?subjectId=2
+
+
+Response Body
+--------------------------------------------------------
+
+{
+    "campaign-audience": {
+        "Audience Permutations": [
+            {
+                "audience-profile": {
+                    "Age Group": "20 - 25",
+                    "Customer Type": "Business",
+                    "Day of Week": "Sunday",
+                    "Email Domain": "aol.com",
+                    "Gender": "Female",
+                    "Tenure Group": "< 5"
+                },
+                "expected-conversions": 1.0
+            },
+            {
+                "audience-profile": {
+                    "Age Group": "25 - 35",
+                    "Customer Type": "Business",
+                    "Day of Week": "Sunday",
+                    "Email Domain": "aol.com",
+                    "Gender": "Female",
+                    "Tenure Group": "< 5"
+                },
+                "expected-conversions": 0.0
+            }
+        ],
+        "Email Subject": "Email Subject 2"
+    }
+}
+
+```
+![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/CampaignAudience.png?raw=true)
 
