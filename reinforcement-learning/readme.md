@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository provides an initial notebook and service that trains on the Email Campaign Data and generates Q Table through Reinforcement Q Learning. [System Plan](SystemPlan.md) outlines the thought process employed in firming scope & requirements, design methodology adopted and deployment & operations. It provides a simple yet complete end to end view of how to develop a machine learning system that can be leveraged in production 
+This repository provides an initial notebook and service that trains on the Email Campaign Data and generates Q Table through Reinforcement Q Learning. [System Plan](SystemsPlan.md) outlines the thought process employed in firming scope & requirements, design methodology adopted and deployment & operations. It provides a simple yet complete end to end view of how to develop a machine learning system that can be leveraged in production 
 
 ## Local Development Environment used for building image
 
