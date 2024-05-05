@@ -24,7 +24,8 @@ class Email_Campaign_Model:
         Predict class for test data and return metrics 
 
     """
-    def __init__(self, email_campaign_df, starting_state = (1,0,0,0,0,0,0), threshold_sent_emails = 10, threshold_conversion_rate = 0.3):
+    def __init__(self, email_campaign_df, starting_state = (1,0,0,0,0,0,0), threshold_sent_emails = 10, threshold_conversion_rate = 0.3, 
+                 qtable_file=None, states=None):
         """ Initializes the Email Campaign Reinforcement Model
 
         Parameters
@@ -37,14 +38,20 @@ class Email_Campaign_Model:
             Threshold of Conversion Rate to consider before stopping next action
         """
         self.email_campaign_df = email_campaign_df
-        self.states = None
+        self.states = states
         self.threshold_sent_emails = threshold_sent_emails
         self.threshold_conversion_rate = threshold_conversion_rate
         email_campaign_field = EmailCampaignField(self.email_campaign_df,starting_state, self.states,
                                                   self.threshold_conversion_rate, self.threshold_sent_emails)
         self.states = email_campaign_field.get_states()
         self.number_of_states =  email_campaign_field.get_number_of_states()
+
+        if (qtable_file is not None):
+            self.q_table_df = pd.read_csv(qtable_file)
     
+    def get_states(self):
+        return self.states
+
     def train(self, iterations=20000, starting_state = (1,0,0,0,0,0,0), 
               epsilon = 0.1, alpha = 0.1,gamma = 0.6):
         """ Train the Model 
@@ -95,12 +102,12 @@ class Email_Campaign_Model:
         return q_table_df 
 
     def get_candidate_states(self, starting_state):
-        q_table = self.q_table_df[["Day of Week","Tenure Group","Email Domain","Age Group","Gender","Type"]].values
+        q_table = self.q_table_df[["Day of Week","Tenure Group","Email Domain","Age Group","Gender","Type","Subject Id"]].values
         epsilon = 0 # Assumes learning is over
         alpha = 0.1
         gamma = 0.6
         
-        email_campaign_field = EmailCampaignField(self.email_campaign_df,starting_state, self.states,0.3,100)
+        email_campaign_field = EmailCampaignField(self.email_campaign_df,starting_state, self.states,self.threshold_conversion_rate,self.threshold_sent_emails)
         done = False
         steps = 0
         candidate_states = []
@@ -119,8 +126,9 @@ class Email_Campaign_Model:
             candidate_states += [new_state]
             q_table[state, action] = (1-alpha)*q_table[state, action]+alpha*(reward+gamma*new_state_max - q_table[state, action])
 
-            steps = steps +1
-
+            steps = steps + 1
+            #print(steps)
+        #print(np.unique(candidate_states))
         return (steps, np.unique(candidate_states))
 
     def test(self, testing_df, random_sample_size=100):

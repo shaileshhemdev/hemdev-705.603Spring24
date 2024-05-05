@@ -40,7 +40,7 @@ Following are the goals of the system
 
 <ol>
     <li>
-        <b>Organizational: </b> Identify the target audience in optimal time that can be repeated for multiple campaigns
+        <b>Organizational: </b> Enable campaign managers to identify the target audience for a given email content (uniquely identified by Subject Id)
     </li>
     <li>
         <b>System:</b>Efficient use of compute and resources to arrive at the target audience
@@ -49,7 +49,7 @@ Following are the goals of the system
         <b>User:</b>Users (Campaign Managers) are able leverage an interface to try different permutations and get the likely conversion rate for that permutation
     </li>
     <li>
-        <b>Model:</b>Model should have high accuracy between projected conversion and actual conversion
+        <b>Model:</b>Model should have ensure actual conversion is greater than desired conversion. 
     </li>
 </ol>
 
@@ -61,8 +61,9 @@ The above goals can be expressed in the following success criteria
     <li>
         <b>Metric Design: </b>The design of the metrics should consider the following  
         <ol>
-            <li>Model should be able to focus on the predicted conversion rates with a set of actions</li>
-            <li>Metrics should track statistics such as Average, Min and Max conversion rates </li>
+            <li>Model should leverage conversion rates for a set of attributes and use it to train the agent</li>
+            <li>Model should factor the number of emails sent in addition to conversion rates to avoid outlier effect</li>
+            <li>Metrics should track statistics such as Average, Min and Max conversion rates to understand the statistical distribution</li>
         </ol>
     </li>
     <li>
@@ -71,6 +72,7 @@ The above goals can be expressed in the following success criteria
             <li>System should be able to retrain the model at prescribed intervals</li>
             <li>System should be able to replace the models used for training and predicting</li>
             <li>System should be able to monitor the performance of the model by running test transactions</li>
+            <li>Actual conversion rates for a given set of attributes encoded in the state input should exceed the conversion goal</li>
         </ol>
     </li>
 </ol>
@@ -83,9 +85,8 @@ Following are the assumptions made by the system
 
 <ol>
     <li>All data needed for the system is collected and accessible by the system</li>
-    <li>Changes in data such as additional attributes or value enumerations or data types are communicated in advance to the system in order to adapt and adjust before these changes are put into production</li>
+    <li>Changes in data such as additional attributes or value enumerations or data types are communicated in advance to the system in order to adapt and adjust before these changes are put into production (E.g. new email subjects)</li>
     <li>Sufficient validations are in place upstream to avoid incomplete or missing data</li>
-    <li>The campaign data present is representative of the campaigns sent to the customers for the given subject ids</li>
     <li>The campaign data present is representative of the campaigns sent to the customers for the given subject ids</li>
 </ol>
 
@@ -98,12 +99,10 @@ Based on the goals we come up with the following requirements
     <li>
         <b>Functional: </b>Here are the functional requirements of the system
         <ol>
-            <li>System should provide a next action to take to the campaign manager as they decide what population of customers they should target the email to</li>
-            <li>System should enable the user (campaign manager) predicted conversion rate for a given action</li>
+            <li>System should advise a next action for a campaign manager to take as they decide what audience they should target</li>
+            <li>System should enable the user (campaign manager) to see conversion rate likely for a given action</li>
             <li>System should allow authorized users (campaign managers) to test random states and action permutations to measure the performance of the system</li>
-           <li>System should allow authorized users (machine learning engineers) to test different models</li>
-           <li>System should allow authorized users (machine learning engineers) to retrain models on existing data</li>
-           <li>System should meet the target conversion rate</li>
+           <li>System should meet the desired conversion rate</li>
         </ol>
     </li>
     <li>
@@ -111,6 +110,8 @@ Based on the goals we come up with the following requirements
         <ol>
            <li>System should allow authorized users (machine learning engineers) to pre process data to be fed into a model for training to cover for situations when the logic of imputation has changed or upstream bugs are discovered</li>
             <li>System should allow authorized users (machine learning engineers) to change thresholds for the model and verify if the model meets the thresholds specified on validation data</li>
+           <li>System should allow authorized users (machine learning engineers) to test different models</li>
+           <li>System should allow authorized users (machine learning engineers) to retrain models on existing data</li>
         </ol>
     </li>
 </ol>
@@ -122,9 +123,9 @@ Based on the goals we come up with the following requirements
 Here are some of the harms that we see 
 
 <ol>
-    <li>Poor Model Quality leads to lower conversion rates</li>
-    <li>Poor Model Quality leads to service provider's domain put on the spam list by major email service providers</li>
-    <li>Customers have a bad perception of the service provider</li>
+    <li>Poor Model Quality leads to actual conversion rates falling below desired</li>
+    <li>Poor Model Quality leads to service provider's domain put on the spam list by major email service providers and / or by customers</li>
+    <li>Customers have a bad perception of the service provider and it affects Brand</li>
 </ol>
 
 
@@ -158,7 +159,7 @@ Our methodology involves the following Software Development Lifecycle processes
         <b>Data Partitioning:</b>We have leveraged a module <b>dataset.py</b> with a class <b>Email_Campaign_Dataset</b> which employs a Stratified K-Fold (default folds 5) to create training and testing data subsets. We use these subsets to provide the training and testing datasets to consumers of this class. There is also a get_validation_dataset method that applies a split from the training data as validation data. 
     </li>
     <li>
-        <b>Model Training and Metrics</b>We have leveraged a module <b>metrics.py</b> with a class <b>Metrics</b> to return metrics on testing data as well as to generate a report. There is a notebook under <b>analysis/model_performance.ipynb</b> that leverages all these classes. Our primary metric is <b>Conversion Rate</b> for which we calculate the Mean, Median, Minimum and Maximum. The general idea is to leverage the Q Table to get the next action (and hence state) and then get the conversion rate at this state. 
+        <b>Model Training and Metrics</b>We have leveraged a module <b>metrics.py</b> with a class <b>Metrics</b> to return metrics on testing data as well as to generate a report. There is a notebook under <b>analysis/model_performance.ipynb</b> that leverages all these classes. Our primary metric is <b>Conversion Rate</b> for which we calculate the Mean, Median, Minimum and Maximum. The general idea is to leverage the Q Table to get the next action (and hence state) and then get the conversion rate at this new state
     </li>
     <li>
         <b>Deployment Strategy:</b>We have packaged the interface into a Flask app in the module <b>email_campaign_service.py</b>. This app exposes a REST API interface and performs the preprocessing and training of the model during the start up phase. It exposes 1 end points one for '/get-next-action' that takes in a payload for a state + action and returns the next action to take. We also have a <b>email_campaign_service_test_nb.ipynb</b> Notebook that starts this service to test it on local

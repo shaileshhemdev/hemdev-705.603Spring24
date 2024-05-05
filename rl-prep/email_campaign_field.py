@@ -230,7 +230,7 @@ class EmailCampaignField:
         if (emails_sent > 0):
             conversion_rate = emails_responded / emails_sent
         
-        #print(f"We have {emails_responded} responded emails out of {emails_sent} sent for subject {email_subject} with conversion rate {conversion_rate}")
+        print(f"We have {emails_responded} responded emails out of {emails_sent} sent for subject {email_subject} with conversion rate {conversion_rate}")
         
         # If the conversion rate for the subject is above threshold we have met our goal for a subject
         if (conversion_rate > self.target_conversion and emails_sent > self.email_sent_threshold):
