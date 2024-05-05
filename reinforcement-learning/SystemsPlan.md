@@ -61,9 +61,8 @@ The above goals can be expressed in the following success criteria
     <li>
         <b>Metric Design: </b>The design of the metrics should consider the following  
         <ol>
-            <li>Model should be able to handle highly unbalanced data since the percentage of Fraud is less than 1% of total transactions and hence we need appropriate metrics that provide a high degree of accuracy for such data</li>
-            <li>Metrics should enable identifying a fraudulent transaction 90% of the time and enable not exceeding the number of times a valid transaction is identified as Fraud by 30%</li>
-            <li>It should have a very high precision (>90%) and high recall (>70%)</li>
+            <li>Model should be able to focus on the predicted conversion rates with a set of actions</li>
+            <li>Metrics should track statistics such as Average, Min and Max conversion rates </li>
         </ol>
     </li>
     <li>
@@ -85,10 +84,9 @@ Following are the assumptions made by the system
 <ol>
     <li>All data needed for the system is collected and accessible by the system</li>
     <li>Changes in data such as additional attributes or value enumerations or data types are communicated in advance to the system in order to adapt and adjust before these changes are put into production</li>
-    <li>Sufficient guard rails are present upstream to foster trust in the data and ensuring data is accurate</li>
     <li>Sufficient validations are in place upstream to avoid incomplete or missing data</li>
-    <li>Business Domain Experts are available to provide suggestions and recommnedations on how to cleanse data including imputations for missing data</li>
-    <li>A large amount of historical labelled (ground truth) data is available to initially train the models and this data is certified by the domain experts</li>
+    <li>The campaign data present is representative of the campaigns sent to the customers for the given subject ids</li>
+    <li>The campaign data present is representative of the campaigns sent to the customers for the given subject ids</li>
 </ol>
 
 
@@ -100,15 +98,12 @@ Based on the goals we come up with the following requirements
     <li>
         <b>Functional: </b>Here are the functional requirements of the system
         <ol>
-            <li>System should predict if a given transaction is fraudulent or not</li>
-            <li>System should enable the user (customer) to indicate if the prediction is accurate or not by approving or declining a fraudulent transaction</li>
-            <li>System should allow authorized users (business users of financial institution) to test random transactions to measure the performance of the system</li>
+            <li>System should provide a next action to take to the campaign manager as they decide what population of customers they should target the email to</li>
+            <li>System should enable the user (campaign manager) predicted conversion rate for a given action</li>
+            <li>System should allow authorized users (campaign managers) to test random states and action permutations to measure the performance of the system</li>
            <li>System should allow authorized users (machine learning engineers) to test different models</li>
            <li>System should allow authorized users (machine learning engineers) to retrain models on existing data</li>
-           <li>System should at least 70% Recall</li>
-           <li>System should at least 90% Precision</li>
-           <li>System should at least 0.8% ROC AUC Score</li>
-           <li>System should at least 0.7% F1 Score</li>
+           <li>System should meet the target conversion rate</li>
         </ol>
     </li>
     <li>
@@ -127,11 +122,9 @@ Based on the goals we come up with the following requirements
 Here are some of the harms that we see 
 
 <ol>
-    <li>Poor Model Quality leads to high number of fraudulent transactions going undetected leading to large scale monetary risk for the financial insitution as well as loss of customers</li>
-    <li>Poor Model Quality leads to high number of valid transactions predicted as fraud leading to large scale customer dissatisfaction</li>
-    <li>Customers in certain age groups or races or locations are more vulnerable to fraud going undetected versus the others leading to a bias perception</li>
-    <li>Sudden dips and surges in the metrics impacting the overall performance of the model</li>
-    <li>Model performance degrades over time</li>
+    <li>Poor Model Quality leads to lower conversion rates</li>
+    <li>Poor Model Quality leads to service provider's domain put on the spam list by major email service providers</li>
+    <li>Customers have a bad perception of the service provider</li>
 </ol>
 
 
@@ -156,22 +149,19 @@ Our methodology involves the following Software Development Lifecycle processes
 
 <ol>
     <li>
-        <b>Data Analysis:</b>In this phase sample datasets or subsets of sample data would be loaded into local development workspaces such as Jupyter notebooks to help understand the data. We will build visualizations and the purpose here would be to get some clues or intuition on what potentially could be affecting the end result. We have done that for this dataset in a notebook under <b>analysis/exploratory_data_analysis.ipynb</b>. In this notebook we are using direct pandas and exploring the data to get some intuition on what could be good candidate features, what cleansing and normalizing we need to do on the data and what models might work out
+        <b>Data Analysis:</b>In this phase sample datasets or subsets of sample data would be loaded into local development workspaces such as Jupyter notebooks to help understand the data. We will build visualizations and the purpose here would be to get some clues or intuition on what potentially could be affecting the end result. We have done that for this dataset in a notebook under <b>analysis/exploratory_data_analysis.ipynb</b>. In this notebook we are using direct pandas and exploring sample reinforcement learning
     </li>
     <li>
-        <b>Dataset Processing:</b>We have leveraged a module <b>dataset.py</b> with a class <b>ETL_Pipeline</b> which follows a Extract, Transform and Load cycle. During extract it reads training data from supplied <b>Fraud Transactions Training Data (transactions-1.csv)</b>. In the <b>extract</b> phase (method) we load the raw data and create a dataframe. In the <b>transform</b> phase (method) we drop columns we don't need but prior to that generate some higher order derived features such as Age, Transaction Day of the Week, Transaction Month, Transaction Time of the Day Segment, Distance between Customer and Merchant's coordinates. We also encode Category into more higher order categories such as Shopping, Entertainment, Home and Misc as well as identify if the transaction is a Internet based or Physical Store based transaction since our analysis shows these have some correlation to the target. This derivation of higher order features enables us to drop a lot of attributes such as customer address components, coordinates for customer and merchant in terms of lat/long, customer name, dob, etc. Finally we apply scaling to all numeric data and encode attributes such as Job Code. Our final features are (Label Encoded), Category (One Hot Encoded into broader categories namely Entertainment,Home,Misc,Shopping) ,Transaction Day of Week (Ordinal Encoded),Transaction Month (Ordinal Encoded) ,Transaction Part of Day (Ordinal Encoded), Amount (Min Max Scaled) ,City Population (Min Max Scaled),Age (Min Max Scaled),Distance from Merchant (Min Max Scaled)
+        <b>Dataset Processing:</b>We have leveraged a module <b>data_pipeline.py</b> with a class <b>ETL_Pipeline</b> which follows a Extract, Transform and Load cycle. During extract it reads training data from supplied <b>Email Campaign Data (sent_emails.csv, responded.csv, userbase.csv)</b>. In the <b>extract</b> phase (method) we load the raw data and create a dataframe. In the <b>transform</b> phase (method) we join the 3 files, perform transformations such as binning Tenure and Age, deriving Sent Day of the Week, etc and then drop columns we don't need. We encode all the values in numeric and save this as a transformed file namely email_campaign_data.csv as a part of <b>load</b> method
     </li>
     <li>
-        <b>Data Partitioning:</b>We have leveraged a module <b>data_pipeline.py</b> with a class <b>Fraud_Dataset</b> which employs a Stratified K-Fold (default folds 5) to create training and testing data subsets. We use these subsets to provide the training and testing datasets to consumers of this class. There is also a get_validation_dataset method that applies a split from the training data as validation data. 
+        <b>Data Partitioning:</b>We have leveraged a module <b>dataset.py</b> with a class <b>Email_Campaign_Dataset</b> which employs a Stratified K-Fold (default folds 5) to create training and testing data subsets. We use these subsets to provide the training and testing datasets to consumers of this class. There is also a get_validation_dataset method that applies a split from the training data as validation data. 
     </li>
     <li>
-        <b>Model Training and Metrics</b>We have leveraged a module <b>metrics.py</b> with a class <b>Metrics</b> to return metrics on testing data as well as to generate a report. There is a notebook under <b>analysis/model_performance.ipynb</b> that leverages all these classes and simulates metrics through various classifiers we have tried. We have used multiple metrics namely Accuracy, Balanced Accuracy, Sensitivity, Specificity, Precision, Recall, F1 Score, ROC AUC Score and Average Precision Score. Of these <b>ROC AUC Score</b>, <b> F1 Score </b> and <b> Balanced Accuracy </b> is what we have deemed relevant for this dataset. Accuracy is ruled out since given the heavy imbalance of the class labels, we can get high accuracy even when the model is performing poorly (see the results for Ada Boosting as an example). 
+        <b>Model Training and Metrics</b>We have leveraged a module <b>metrics.py</b> with a class <b>Metrics</b> to return metrics on testing data as well as to generate a report. There is a notebook under <b>analysis/model_performance.ipynb</b> that leverages all these classes. Our primary metric is <b>Conversion Rate</b> for which we calculate the Mean, Median, Minimum and Maximum. The general idea is to leverage the Q Table to get the next action (and hence state) and then get the conversion rate at this state. 
     </li>
     <li>
-        <b>Model Selection Analysis:</b>We have tried 3 classifiers Random Forest, Gradiant Boosting and Ada Boosting. Of these we found <b>Random Forest</b> to have the best metrics across different folds. There is a notebook under <b>analysis/model_performance.ipynb</b> that leverages all these classes and simulates metrics through various classifiers we have tried. 
-    </li>
-    <li>
-        <b>Deployment Strategy:</b>We have packaged the interface into a Flask app in the module <b>fraud_service.py</b>. This app exposes a REST API interface and performs the cleansing, feature selection and training of the model during the start up phase. It exposes 2 end points one for '/stats' that sends testing split using the Fraud_Dataset module to get the statistics which we have discussed in the Metrics. The second end point is '/detect-fraud' that takes in a payload for a transaction and returns a prediction if it is fraudulent or not. We also have a <b>fraud_service_test_nb.ipynb</b> Notebook that starts this service to test it on local
+        <b>Deployment Strategy:</b>We have packaged the interface into a Flask app in the module <b>email_campaign_service.py</b>. This app exposes a REST API interface and performs the preprocessing and training of the model during the start up phase. It exposes 1 end points one for '/get-next-action' that takes in a payload for a state + action and returns the next action to take. We also have a <b>email_campaign_service_test_nb.ipynb</b> Notebook that starts this service to test it on local
     </li>
 </ol>
 
@@ -184,7 +174,7 @@ Our overall system design involves the following key components
         <b>Pipeline:</b>We will build a Machine Learning pipeline that has several steps and data can flow into and out from these steps where each step performs specific tasks such as pre-processing or training
     </li>
     <li>
-        <b>Data Pre-processing:</b>This component will prepare the data so that it is usable for any learning process. This involves imputing missing values, scaling and normalizing the data, performing transformations such as address normalizations or case sensitivities or encoding or labelling data. The final transformed data will flow through the Data Processing Pipeline to the next stage often saving the transformed files somewhere for efficient usages by the next stages in the pipeline
+        <b>Data Pre-processing:</b>This component will prepare the data so that it is usable for any learning process. This involves joining, some transforms and encoding. The final transformed data will flow through the Data Processing Pipeline to the next stage often saving the transformed files somewhere for efficient usages by the next stages in the pipeline
     </li>
     <li>
         <b>Feature Engineering:</b>This component will analyze all the features and drop features that are not necessary. Additionally it might perform some higher order transformations that generate new features that are permutations and combinations of the original input features to create the final set of features to be used for training
@@ -216,13 +206,10 @@ We have assumed that following upstream human machine interactions would exist
 
 <ol>
     <li>
-        <b>Engagement based on Fraud Prediction:</b>Our service predicts whether a transaction is fraud is not. System consuming this information along with upstream systems would need to engage the user to confirm if it is a fraud prior to approving or declining the transaction. 
+        <b>Customer Data Updates :</b>Updates to customer data for new customers and existing ones
     </li>
     <li>
-        <b>Customer Fraud Engagement Feedback:</b>We have assumed that an upstream system will log the actual fraud class when the customer is asked to confirm if a transaction is fraudulent or not. Similarly if a fraudulent transaction is not predicted but the customer engages the institution after the incident, the same would be captured. 
-    </li>
-    <li>
-        <b>New Ground Truth Data:</b>We expect an upstream system to periodically send us new training data on the basis of the latest set of transactions joined with the feedback received from customer. Thus the service provider team comprising of ML engineers, Data Scientists and Software engineers would analyze this data and find ways to improve the model with new classifiers, some more transformations and releasing it to production to measure performance. 
+        <b>New Ground Truth Data:</b>As new emails are sent their subject ids are updated along with the latest response data
     </li>
 </ol>
 
@@ -232,16 +219,13 @@ We have researched for following resources that speak to what a financial instit
 
 <ol>
     <li>
-        <b>OCC:</b>https://www.occ.treas.gov/news-issuances/bulletins/2019/bulletin-2019-37.html
+        <b>CAN-SPAM:</b>https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business
     </li>
     <li>
-        <b>CFPB:</b>https://www.consumerfinance.gov/rules-policy/regulations/1005/6/
+        <b>Spam and malware:</b>https://crtc.gc.ca/eng/internet/anti.htm
     </li>
     <li>
-        <b>FDIC:</b>https://www.fdic.gov/resources/supervision-and-examinations/examination-policies-manual/section9-1.pdf
-    </li>
-    <li>
-        <b>DOJ:</b>https://www.justice.gov/archives/jm/criminal-resource-manual-958-fraud-affecting-financial-institution
+        <b>UK:</b>https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guide-to-pecr/electronic-and-telephone-marketing/electronic-mail-marketing/
     </li>
 </ol>
 

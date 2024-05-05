@@ -1,10 +1,14 @@
 from flask import Flask
 from flask import request, jsonify
-
+import sys
+import os
 import pandas as pd
 import numpy as np
 
 from email_campaign_field import EmailCampaignField
+from data_pipeline import ETL_Pipeline 
+from dataset import Email_Dataset
+from model import Email_Campaign_Model
 
 app = Flask(__name__)
 
@@ -76,13 +80,30 @@ if __name__ == "__main__":
     """
     flaskPort = 8786
 
+    # Get command line arguments
+    if (len(sys.argv)>1):
+        data_folder                 = sys.argv[1]
+        sent_emails_file            = sys.argv[2]
+        responded_emails_file       = sys.argv[3]
+        customers_file              = sys.argv[4]
+    else: 
+        data_folder                 = os.environ['data-folder']
+        sent_emails_file            = os.environ['sent-emails-file']
+        responded_emails_file       = os.environ['responded-emails-file']
+        customers_file              = os.environ['customers-file']
+
+    # Process the Data needed to train the model
+    print(f'Start an ETL_Pipeline to load training data with shared folder = {data_folder} and sent emails file = {sent_emails_file}, resp emails file = {responded_emails_file}, customers file = {customers_file}')
+    dp = ETL_Pipeline(data_folder)
+    df = dp.process(sent_emails_file,responded_emails_file,customers_file)
+
     # Load the Q Table
     q_table_df = pd.read_csv('q_table.csv')
     q_table = q_table_df[["Day of Week","Tenure Group","Email Domain","Age Group","Gender","Type"]].values
     print('Successfully obtained Q Table')
 
     # Load the transformed data 
-    df = pd.read_csv('email_campaign_data.csv')
+    df = pd.read_csv(data_folder + 'email_campaign_data.csv')
     print('Successfully obtained Campaign Data')
 
     # Initialize the Email Campaign Field

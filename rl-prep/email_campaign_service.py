@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request, jsonify
-
+import sys
+import os
 import pandas as pd
 import numpy as np
 
@@ -75,6 +76,18 @@ if __name__ == "__main__":
 
     """
     flaskPort = 8786
+
+    # Get command line arguments
+    if (len(sys.argv)>1):
+        data_folder                 = sys.argv[1]
+        sent_emails_file            = sys.argv[2]
+        responded_emails_file       = sys.argv[3]
+        customers_file              = sys.argv[4]
+    else: 
+        data_folder                 = os.environ['data-folder']
+        sent_emails_file            = os.environ['sent-emails-file']
+        responded_emails_file       = os.environ['responded-emails-file']
+        customers_file              = os.environ['customers-file']
 
     # Load the Q Table
     q_table_df = pd.read_csv('q_table.csv')
