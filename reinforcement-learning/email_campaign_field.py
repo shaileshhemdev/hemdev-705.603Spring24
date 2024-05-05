@@ -70,7 +70,8 @@ class EmailCampaignField:
             age_group = row['Age_Group']
             gender = row['Gender']
             type_attr = row['Type']
-            response_type = row['Response_Received']
+            responses_received = row['Response_Received']
+            sent_emails = row['Sent_Emails']
 
             # Encode the state
             subject_id_idx = subject_id - 1
@@ -83,11 +84,8 @@ class EmailCampaignField:
             state = state + type_attr
             
             # Increment for this state to conversion as a tuple of (Total Responses Received, Total Emails Sent)
-            current_emails_sent = emails_sent[state]
-            current_emails_responded = emails_responded[state]
-
-            emails_sent[state] = current_emails_sent + 1
-            emails_responded[state] = current_emails_responded + response_type
+            emails_sent[state] = sent_emails
+            emails_responded[state] = responses_received
         
         states = list()
         for i in range(0,len(emails_sent)):
@@ -223,8 +221,8 @@ class EmailCampaignField:
     def is_conversion_goal_met(self, email_subject, conversion_stats):
         conversion_goal_met = False
 
-        emails_responded = self.emails_responded_by_subject[email_subject] + conversion_stats[0]
-        emails_sent =  self.emails_sent_by_subject[email_subject] + conversion_stats[1]
+        emails_responded = conversion_stats[0]
+        emails_sent = conversion_stats[1]
 
         conversion_rate = 0.0
         if (emails_sent > 0):

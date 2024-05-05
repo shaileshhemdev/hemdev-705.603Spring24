@@ -134,7 +134,11 @@ class Metrics:
                             & (target_df['Email_Domain'] == state[3]) & (target_df['Age_Group'] == state[4]) & (target_df['Gender'] == state[5]) 
                             & (target_df['Type'] == state[6])]
             responses_received = np.sum(filtered_df['Response_Received'].values)
-            emails_sent = len(filtered_df)
-            conversions += [responses_received/emails_sent]
+            emails_sent = np.sum(filtered_df['Sent_Emails'].values)
+
+            if (emails_sent > 0):
+                conversions += [responses_received/emails_sent]
+            else:
+                conversions += [0.0]
         
         return conversions

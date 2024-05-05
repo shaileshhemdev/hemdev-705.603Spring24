@@ -87,7 +87,7 @@ def get_campaign_audience():
     """
     # Obtain subject Id
     subject_id = request.args.get('subjectId')
-    print(subject_id)
+
     # Construct state 
     state = (int(subject_id),0,0,0,0,0,0)
 
@@ -120,24 +120,29 @@ if __name__ == "__main__":
     dp = ETL_Pipeline(data_folder)
     df = dp.process(sent_emails_file,responded_emails_file,customers_file)
 
-    # Load the Q Table
-    q_table_df = pd.read_csv('q_table.csv')
-    q_table = q_table_df[["Day of Week","Tenure Group","Email Domain","Age Group","Gender","Type"]].values
-    print('Successfully obtained Q Table')
-
     # Load the transformed data 
     df = pd.read_csv(data_folder + 'email_campaign_data.csv')
     print('Successfully obtained Campaign Data')
 
-    # Initialize the Email Campaign Field
+    # Initialize the model
     starting_state = (1,0,0,0,0,0,0)
-    email_campaign_field = EmailCampaignField(df,starting_state)
+    email_campaign_model = Email_Campaign_Model(df)
+    print('Successfully initialized Email_Campaign_Model')
+
+    # Build the Q Table
+    q_table_df = email_campaign_model.train(iterations=20000, starting_state = starting_state, epsilon = 0.1, alpha = 0.1,gamma = 0.6)
+    print('Successfully obtained Q Table')
+
+    # Save the Q Table
+    q_table_df.to_csv(data_folder + 'q_table.csv')
+
+    # Initialize the Email Campaign Field
+    email_campaign_field = EmailCampaignField(df,starting_state, email_campaign_model.get_states(), 0.1, 10, 3)
     states = email_campaign_field.get_states()
     print(f'Successfully initialized EmailCampaignField and obtained states = {len(states)}')
 
-    # Initialize the model
-    email_campaign_model = Email_Campaign_Model(df, starting_state, 1, 0.25, 'q_table.csv', states)
-    print('Successfully initialized Email_Campaign_Model')
+    # Load the Q Table
+    q_table = q_table_df[["Day of Week","Tenure Group","Email Domain","Age Group","Gender","Type"]].values
 
     # Now that all the setup has been done start the service
     print('Starting Server...')

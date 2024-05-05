@@ -50,7 +50,7 @@ class Email_Dataset:
         self.y = self._df[class_label_col].values.ravel()
 
         # Store column array
-        self.column_names = ['SubjectLine_ID','Gender','Type','Email_Domain','Age_Group','Tenure_Group','Sent_Day','Response_Received']
+        self.column_names = ['SubjectLine_ID','Gender','Type','Email_Domain','Age_Group','Tenure_Group','Sent_Day','Sent_Emails','Response_Received']
 
         # Perform a K Fold 
         skf = StratifiedKFold(n_splits=n_folds)

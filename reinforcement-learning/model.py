@@ -191,8 +191,6 @@ class Email_Campaign_Model:
         tenure_dict = {0:"< 5",1:"5 - 10", 2:"10 - 15", 3: "15 - 20", 4:"20 - 25", 5: "25 - 30",6:"> 30"}
         age_dict = {0:"< 20",1:"20 - 25", 2:"25 - 35", 3: "35 - 45", 4:"> 45"}
 
-        print(domain_dict)
-
         audiences = list()
         i = 0
         for candidate_state in candidate_states:
@@ -201,7 +199,7 @@ class Email_Campaign_Model:
 
             # Build the audience profile
             audience_profile = dict()
-            print(candidate)
+
             audience_profile["Day of Week"] = dow_dict[candidate[1]]
             audience_profile["Tenure Group"] = tenure_dict[candidate[2]]
             audience_profile["Email Domain"] = domain_dict[candidate[3]]

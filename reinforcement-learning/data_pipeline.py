@@ -153,20 +153,16 @@ class ETL_Pipeline:
         self.customer_type_mappings = dict(zip(type_encoder.transform(type_encoder.classes_),type_encoder.classes_))
         self.gender_mappings = dict(zip(gender_encoder.transform(gender_encoder.classes_),gender_encoder.classes_))
 
-        #print(self.email_domain_mappings)
-        #print(self.customer_type_mappings)
-        #print(self.gender_mappings)
-
         # Drop columns
         cols_to_drop = ['Sent_Date','Customer_ID','Email_Address','Age','Tenure','Responded_Date','sent_dt']
         trimmed_df = df_merge_recd.drop(columns=cols_to_drop,errors='ignore')
 
         # Group the columns to reduce the amount of data processed
-        grouped_multiple = trimmed_df.groupby(['SubjectLine_ID', 'Gender','Type','Email_Domain','Tenure_Group','Sent_Day']).agg({'Response_Received': ['sum','count']})
+        grouped_multiple = trimmed_df.groupby(['SubjectLine_ID', 'Gender','Type','Email_Domain','Tenure_Group','Age_Group','Sent_Day']).agg({'Response_Received': ['sum','count']})
         grouped_multiple.columns = ['Response_Received','Sent_Emails']
         grouped_multiple = grouped_multiple.reset_index()
 
-        self.transformed_df = trimmed_df
+        self.transformed_df = grouped_multiple # trimmed_df
 
         return self.transformed_df
    
