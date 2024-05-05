@@ -91,34 +91,3 @@ Response Body
 
 ![Image Not Showing](https://github.com/shaileshhemdev/public-images/blob/main/GetNextActionAPI.png?raw=true)
 
-## Notebook
-
-Refer to [Email Campaigns Exploration](email-campaigns.ipynb). The notebook demonstrates the following
-
-<ul>
-    <li>
-        <b>Preprocessing:</b>The preprocessing done to arrive at the final <b>email_campaign_data.csv</b> file
-    </li>
-    <li>
-        <b>Email Campaign Field:</b>Encapsulation of the State Space, Actions and Reward Functions
-    </li>
-    <li>
-        <b>Q Table:</b> Q Table Generation using above which generates the <b>q_table.csv</b> file
-    </li>
-</ul>
-
-
-## Taxi environment (Other Notebooks)
-
-A Q-learning implementation for OpenAIs Taxi-v3 environment. The notebook can be used as a tutorial for beginners in Reinforcement Learning.
-
-## References
-
-The following sources were used in constructing this notebook:
-
-[1] OpenAI Gym. Taxi-v3 environment. The OpenAI Gym environment is available under the MIT License.  <br> https://github.com/openai/gym/blob/master/gym/envs/toy_text/taxi.py
-
-[2] LearnDataSci. Reinforcement Q-Learning from Scratch in Python with OpenAI Gym. Taxi-v2 implementation. <br> https://www.learndatasci.com/tutorials/reinforcement-q-learning-scratch-python-openai-gym/
-
-[3] Botforge. Save OpenAI Gym renders as GIFS. Public GitHub Gist. <br>
-https://gist.github.com/botforge/64cbb71780e6208172bbf03cd9293553
