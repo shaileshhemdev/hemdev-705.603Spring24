@@ -167,33 +167,58 @@ class Email_Campaign_Model:
 
         return metrics.run(achieved_conversion_rates)
 
-    def predict(self, transaction_details):
-        """ Predict whether the transaction is fraud depending on the transaction details
+    def predict(self, state):
+        """ Predicts what states will give what conversions
 
         Parameters
         ----------
-        transaction_details : dictionary
-            Dictionary of transaction attributes 
+        state : object
+            Initial state 
         """
-        # Putting a dummy is_fraud to leverage the model
-        transaction_details['is_fraud'] = 0
+         # Initialize the metrics 
+        metrics = Metrics()
 
-        # Create a dataframe from 
-        input_df = pd.DataFrame.from_dict([transaction_details])
+        steps, candidate_states = self.get_candidate_states(state)
 
-        # Run the data pipeline on the data
-        dp = ETL_Pipeline('')
-        transformed_df = dp.transform(input_df)
+        predicted_conversion_rates = metrics.conversion_rates(self.email_campaign_df, candidate_states)
 
-        # Extract the features in order to make the prediction
-        X_predict = transformed_df.loc[:, transformed_df.columns != 'is_fraud'].values
+        # Initialize the dictionaries
+        subject_dict = {1: "Email Subject 1", 2: "Email Subject 2", 3: "Email Subject 3"}
+        dow_dict = {0: "Sunday", 1: "Monday", 2: "Tuesday",3:"Wednesday",4:"Thursday",5:"Friday",6:"Saturday"}
+        gender_dict = {0: 'Female', 1: 'Male'}
+        type_dict = {0: 'Business', 1: 'Consumer'}
+        domain_dict = {0: 'aol.com', 1: 'comcast.net', 2: 'gmail.com', 3: 'hotmail.com', 4: 'msn.com', 5: 'yahoo.com'}
+        tenure_dict = {0:"< 5",1:"5 - 10", 2:"10 - 15", 3: "15 - 20", 4:"20 - 25", 5: "25 - 30",6:"> 30"}
+        age_dict = {0:"< 20",1:"20 - 25", 2:"25 - 35", 3: "35 - 45", 4:"> 45"}
 
-        # Find the predicted value
-        y_pred = self.cls.predict(X_predict)
+        print(domain_dict)
 
-        # Decide if its fraud
-        is_fraud = False 
-        if (y_pred == 1):
-            is_fraud = True
+        audiences = list()
+        i = 0
+        for candidate_state in candidate_states:
+            # Decode the state
+            candidate = metrics.state_decoded(candidate_state)
 
-        return is_fraud
+            # Build the audience profile
+            audience_profile = dict()
+            print(candidate)
+            audience_profile["Day of Week"] = dow_dict[candidate[1]]
+            audience_profile["Tenure Group"] = tenure_dict[candidate[2]]
+            audience_profile["Email Domain"] = domain_dict[candidate[3]]
+            audience_profile["Age Group"] = age_dict[candidate[4]]
+            audience_profile["Gender"] = gender_dict[candidate[5]]
+            audience_profile["Customer Type"] = type_dict[candidate[6]]
+
+            audience_dict = dict()
+            audience_dict["audience-profile"] = audience_profile
+            audience_dict["expected-conversions"] = predicted_conversion_rates[i]
+
+            audiences.append(audience_dict)
+
+            i += 1
+
+        response_dict = dict()
+        response_dict["Email Subject"] = subject_dict[state[0]]
+        response_dict["Audience Permutations"] = audiences
+
+        return response_dict

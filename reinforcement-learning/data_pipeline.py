@@ -53,6 +53,11 @@ class ETL_Pipeline:
         self.response_df = None
         self.customer_df = None
         self.transformed_df = None
+
+        # Store encoding mappings
+        self.customer_type_mappings = None
+        self.gender_mappings = None
+        self.email_domain_mappings = None
     
     def process(self, sent_file, response_file, customer_file):
         """ Executes the Pipeline to return transformed dataset 
@@ -144,11 +149,30 @@ class ETL_Pipeline:
         df_merge_recd['Type']= type_encoder.fit_transform(df_merge_recd['Type']) 
         df_merge_recd['Email_Domain']= domain_encoder.fit_transform(df_merge_recd['Email_Domain']) 
 
+        self.email_domain_mappings = dict(zip(domain_encoder.transform(domain_encoder.classes_),domain_encoder.classes_))
+        self.customer_type_mappings = dict(zip(type_encoder.transform(type_encoder.classes_),type_encoder.classes_))
+        self.gender_mappings = dict(zip(gender_encoder.transform(gender_encoder.classes_),gender_encoder.classes_))
+
+        #print(self.email_domain_mappings)
+        #print(self.customer_type_mappings)
+        #print(self.gender_mappings)
+
+        # Drop columns
         cols_to_drop = ['Sent_Date','Customer_ID','Email_Address','Age','Tenure','Responded_Date','sent_dt']
-        self.transformed_df = df_merge_recd.drop(columns=cols_to_drop,errors='ignore')
+        trimmed_df = df_merge_recd.drop(columns=cols_to_drop,errors='ignore')
+
+        # Group the columns to reduce the amount of data processed
+        grouped_multiple = trimmed_df.groupby(['SubjectLine_ID', 'Gender','Type','Email_Domain','Tenure_Group','Sent_Day']).agg({'Response_Received': ['sum','count']})
+        grouped_multiple.columns = ['Response_Received','Sent_Emails']
+        grouped_multiple = grouped_multiple.reset_index()
+
+        self.transformed_df = trimmed_df
 
         return self.transformed_df
    
+    def get_encoder_mappings(self):
+        return (self.email_domain_mappings, self.gender_mappings, self.customer_type_mappings)
+    
     def load(self):
         """ Loads the Transformed Data into File System and returns it 
 

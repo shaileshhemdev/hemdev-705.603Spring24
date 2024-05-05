@@ -1,30 +1,30 @@
 Model Results for Training Fold 0:
-		Average Conversion Rate = 34.77%
-		Median Conversion Rate  = 34.27%
-		Minimum Conversion Rate  = 28.45%
-		Maximum Conversion Rate  = 44.44%
+		Average Conversion Rate = 33.70%
+		Median Conversion Rate  = 33.12%
+		Minimum Conversion Rate  = 29.40%
+		Maximum Conversion Rate  = 40.30%
 
 Model Results for Training Fold 1:
-		Average Conversion Rate = 33.50%
-		Median Conversion Rate  = 33.93%
-		Minimum Conversion Rate  = 28.57%
-		Maximum Conversion Rate  = 37.49%
+		Average Conversion Rate = 30.74%
+		Median Conversion Rate  = 30.68%
+		Minimum Conversion Rate  = 25.48%
+		Maximum Conversion Rate  = 37.81%
 
 Model Results for Training Fold 2:
-		Average Conversion Rate = 34.56%
-		Median Conversion Rate  = 35.52%
-		Minimum Conversion Rate  = 26.43%
-		Maximum Conversion Rate  = 39.02%
+		Average Conversion Rate = 34.08%
+		Median Conversion Rate  = 33.77%
+		Minimum Conversion Rate  = 29.40%
+		Maximum Conversion Rate  = 40.04%
 
 Model Results for Training Fold 3:
-		Average Conversion Rate = 33.85%
-		Median Conversion Rate  = 33.63%
-		Minimum Conversion Rate  = 26.55%
-		Maximum Conversion Rate  = 43.02%
+		Average Conversion Rate = 31.09%
+		Median Conversion Rate  = 30.78%
+		Minimum Conversion Rate  = 25.54%
+		Maximum Conversion Rate  = 41.09%
 
 Model Results for Training Fold 4:
-		Average Conversion Rate = 33.98%
-		Median Conversion Rate  = 35.59%
-		Minimum Conversion Rate  = 27.74%
-		Maximum Conversion Rate  = 38.75%
+		Average Conversion Rate = 34.71%
+		Median Conversion Rate  = 34.33%
+		Minimum Conversion Rate  = 30.54%
+		Maximum Conversion Rate  = 42.35%
 

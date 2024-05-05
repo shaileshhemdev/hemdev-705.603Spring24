@@ -20,7 +20,7 @@ As a part of service initialization we will load the q_table trained in our note
 
 Methods
 -------
-detect_fraud()
+get_next_action()
     Will determine if the supplied transaction is fraudulent or not. To execute you use POST http://localhost:8786/detect-fraud
 
     Sample JSON as body below
@@ -74,6 +74,29 @@ def get_next_action():
     # Return the result as Json
     return jsonify({"next_action": next_action.item()})
 
+@app.route('/campaign-audience', methods=['GET'])
+def get_campaign_audience():
+    """ Get next action given a state
+        
+    Parameters 
+    ----------
+    Query parameters with following mandatory attributes
+
+    subjectId : str
+        The email subject id for which audience profiles are needed
+    """
+    # Obtain subject Id
+    subject_id = request.args.get('subjectId')
+    print(subject_id)
+    # Construct state 
+    state = (int(subject_id),0,0,0,0,0,0)
+
+    # Create Email campaign data
+    campaign_audience = email_campaign_model.predict(state)
+
+    # Return the result as Json
+    return jsonify({"campaign-audience": campaign_audience})
+
 if __name__ == "__main__":
     """ Initializes the Email Campaign Service Class
 
@@ -110,6 +133,11 @@ if __name__ == "__main__":
     starting_state = (1,0,0,0,0,0,0)
     email_campaign_field = EmailCampaignField(df,starting_state)
     states = email_campaign_field.get_states()
+    print(f'Successfully initialized EmailCampaignField and obtained states = {len(states)}')
+
+    # Initialize the model
+    email_campaign_model = Email_Campaign_Model(df, starting_state, 1, 0.25, 'q_table.csv', states)
+    print('Successfully initialized Email_Campaign_Model')
 
     # Now that all the setup has been done start the service
     print('Starting Server...')
